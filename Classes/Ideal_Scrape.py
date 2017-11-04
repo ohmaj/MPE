@@ -21,9 +21,9 @@ class database_connection():
                 try:
                     product['Quantity'] = ideal_dataset[sku]['ONHANDAVAILABLEQUANTITY']
                 except:
-                    product['Quantity'] = 'error1'
+                    product['Quantity'] = '0'
             except:
-                product['Quantity'] = 'error2'
+                product['Quantity'] = '0'
         self.write_dict_to_csv(product_ids_dataset)
 
     def get_product_ids_dataset(self):
