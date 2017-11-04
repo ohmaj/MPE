@@ -1,6 +1,7 @@
 import pyodbc
 import csv
 import time
+import re
 
 class database_connection():
     def __init__(self):
@@ -16,13 +17,13 @@ class database_connection():
             product['Fulfillment Source'] = 'self'
             product['Action'] = 'Reconcileto'
             try:
-                sku = product['SKU'].replace(' ', '').replace('-', '')
+                sku = product['Ideal SKU']
                 try:
                     product['Quantity'] = ideal_dataset[sku]['ONHANDAVAILABLEQUANTITY']
                 except:
-                    product['Quantity'] = 0
+                    product['Quantity'] = 'error1'
             except:
-                product['Quantity'] = 'error'
+                product['Quantity'] = 'error2'
         self.write_dict_to_csv(product_ids_dataset)
 
     def get_product_ids_dataset(self):
@@ -31,7 +32,20 @@ class database_connection():
                 reader = csv.DictReader(f)
                 for row in reader:
                     del row['Title']
-                    yield (row)
+                    parsed_row = self.parse_item_sku(row)
+                    yield (parsed_row)
+
+    def parse_item_sku(self, item):
+        sku = item['SKU']
+        parsed_sku = re.findall("\[(.*?)\]", sku)
+        mfr = parsed_sku[0]
+        ebay_product_number = sku[2]
+        item['MFR'] = mfr
+        item['Ideal SKU'] = '['+mfr+']['+item['Product ID'].replace(' ', '').replace('-', '').strip('[]').lstrip('0')+']'
+        item['eBay Product SKU Number'] = ebay_product_number
+        print(item['Ideal SKU'])
+        return item
+
 
     def get_ideal_dataseet(self):
         connection = pyodbc.connect("DSN=Ideal ODBC")
