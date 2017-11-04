@@ -5,6 +5,7 @@ from Classes import Distributor_AIP
 from Classes import XML_CPD
 from Classes import From_File_OscarWilson
 from Classes import Run_All
+from Classes import Ideal_Scrape
 import sys
 import os
 
@@ -12,7 +13,7 @@ class User_Interface:
 
     def main_menu(self):
         self.cls()
-        print('Main Menu \n ------------ \n [1]Golden Eagle [2] Ariens [3] Kawasaki [4] AIP [5] CPD [6] Oscar Wilson [7] Run All [exit] Exit Program')
+        print('Main Menu \n ------------ \n [1]Golden Eagle [2] Ariens [3] Kawasaki [4] AIP [5] CPD [6] Oscar Wilson [7] Ideal [8] Run All [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             self.golden_eagle_menu()
@@ -27,6 +28,9 @@ class User_Interface:
         elif userSelection == '6':
             self.ow_menu()
         elif userSelection == '7':
+            ideal = Ideal_Scrape.database_connection()
+            ideal.main()
+        elif userSelection == '8':
             all = Run_All.Run_All()
             all.run()
         elif userSelection == 'exit':
