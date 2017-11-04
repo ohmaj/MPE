@@ -22,6 +22,7 @@ class Kawasaki(Distributor.Scrape_Distributor):
                 if src == '/img/legend/diamond-green-1.gif':
                     availability = '10'
                     break
+        # TODO needs work to get kawasaki cost correctly
         # item['Cost'] = cost[0].strip('$ ')
         item['Quantity'] = availability
         return (item)
