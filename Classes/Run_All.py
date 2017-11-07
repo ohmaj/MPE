@@ -38,16 +38,6 @@ class Run_All:
         ideal = Ideal_Scrape.database_connection()
         ideal.save_to_filepath = results_filepath
         try:
-            kaw.scrape_inventory()
-            kaw_success ='Kawasaki Update Successful'
-        except:
-            kaw_success ='Error Updating Kawasaki'
-        try:
-            arn.scrape_inventory()
-            arn_success ='Ariens Update Successful'
-        except:
-            arn_success ='Error Updating Ariens'
-        try:
             ech.scrape_inventory()
             ech_success ='Echo Update Successful'
         except:
@@ -92,6 +82,16 @@ class Run_All:
             koh_success ='Kohler Update Successful'
         except:
             koh_success ='Error Updating Kohler'
+        try:
+            kaw.scrape_inventory()
+            kaw_success ='Kawasaki Update Successful'
+        except:
+            kaw_success ='Error Updating Kawasaki'
+        try:
+            arn.scrape_inventory()
+            arn_success ='Ariens Update Successful'
+        except:
+            arn_success ='Error Updating Ariens'
         try:
             ideal.main()
             ideal_success ='Self Update Successful'
