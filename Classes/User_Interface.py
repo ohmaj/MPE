@@ -59,7 +59,7 @@ class User_Interface:
 
     def cpd_menu(self):
         self.cls()
-        print('Main Menu \n ------------ \n [1]XML Inquiry Quantity [2] Get XML Response Only [back] Back to Main Menu [exit] Exit Program')
+        print('CPD Menu \n ------------ \n [1] XML Inquiry Quantity [2] Get XML Response Only [back] Back to Main Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             self.cpd_xml_menu()
@@ -129,7 +129,7 @@ class User_Interface:
         elif userSelection == 'exit':
             sys.exit()
 
-    def cpd_xml_menu(self):
+    def cpd_xml_response(self):
         self.cls()
         print('CPD Scrape Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] All [back] Back to CPD Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
@@ -175,9 +175,9 @@ class User_Interface:
             self.cpd_xml_response()
         self.cpd_xml_response()
 
-    def cpd_xml_response(self):
+    def cpd_xml_menu(self):
         self.cls()
-        print('CPD Scrape Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] All [back] Back to CPD Menu [exit] Exit Program')
+        print('CPD XML Response Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] All [back] Back to CPD Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             koh = XML_CPD.CPD('KOH')
