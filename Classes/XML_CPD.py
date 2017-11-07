@@ -17,13 +17,15 @@ class CPD:
         self.product_data_set = self.get_data_set()
         self.xml_header = '<?xml version="1.0" encoding="utf-8" ?><inventory_request>\n'
         self.xml_footer = '</inventory_request>'
-        self.inquiry_limit = 500
+        self.inquiry_limit = 1000
 
     def get_update(self):
         xml_inquiries = list(self.get_xml())
         parsed_data_set = []
         i = 1
+        count = len(xml_inquiries)
         for inquiry in xml_inquiries:
+            print(self.mfr + ' Getting Response: ' + str(i) + ' of ' + str(count))
             try:
                 response = self.get_cpd_response(inquiry)
             except:
@@ -49,7 +51,9 @@ class CPD:
     def get_xml_response(self):
         i = 1
         xml_inquiries = list(self.get_xml())
+        count = len(xml_inquiries)
         for inquiry in xml_inquiries:
+            print(self.mfr + ' Getting Response: ' + str(i) + ' of ' + str(count))
             response = self.get_cpd_response(inquiry)
             file_path = self.errors_filepath + self.mfr + '_Api_Response' +str(i)+ '.xml'
             temp_writer = open(file_path, 'w')
