@@ -83,15 +83,15 @@ class Run_All:
         except:
             koh_success ='Error Updating Kohler'
         try:
-            kaw.scrape_inventory()
-            kaw_success ='Kawasaki Update Successful'
-        except:
-            kaw_success ='Error Updating Kawasaki'
-        try:
             arn.scrape_inventory()
             arn_success ='Ariens Update Successful'
         except:
             arn_success ='Error Updating Ariens'
+        try:
+            kaw.scrape_inventory()
+            kaw_success = 'Kawasaki Update Successful'
+        except:
+            kaw_success = 'Error Updating Kawasaki'
         try:
             ideal.main()
             ideal_success ='Self Update Successful'
