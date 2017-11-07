@@ -101,7 +101,7 @@ class Scrape_Distributor(object):
                           'Fulfillment Source': 'Drop Shipper',
                           'PO Number' : product['PO Number'],
                           'Invoice Number' : product['Invoice Number'],
-                          'Action': 'Rconcileto',
+                          'Action': 'Reconcileto',
                           'Error': product['Error']
                           } for product in updated_products]
         print('Writing File....')
