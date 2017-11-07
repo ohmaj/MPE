@@ -59,12 +59,12 @@ class User_Interface:
 
     def cpd_menu(self):
         self.cls()
-        print('Main Menu \n ------------ \n [1]XML Inquiry[back] Back to Main Menu [exit] Exit Program')
+        print('Main Menu \n ------------ \n [1]XML Inquiry Quantity [2] Get XML Response Only [back] Back to Main Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             self.cpd_xml_menu()
-        # elif userSelection == '2':
-        #     self.cpd_scrape_menu()
+        elif userSelection == '2':
+            self.cpd_xml_response()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
@@ -135,6 +135,52 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             koh = XML_CPD.CPD('KOH')
+            koh.get_xml_response()
+        elif userSelection == '2':
+            tec = XML_CPD.CPD('TEC')
+            tec.get_xml_response()
+        elif userSelection == '3':
+            hyg = XML_CPD.CPD('HYD')
+            hyg.get_xml_response()
+        elif userSelection == '4':
+            ic = XML_CPD.CPD('IC')
+            ic.get_xml_response()
+        elif userSelection == '5':
+            try:
+                koh = XML_CPD.CPD('KOH')
+                koh.get_xml_response()
+            except:
+                pass
+            try:
+                tec = XML_CPD.CPD('TEC')
+                tec.get_xml_response()
+            except:
+                pass
+            try:
+                hyg = XML_CPD.CPD('HYD')
+                hyg.get_xml_response()
+            except:
+                pass
+            try:
+                case = XML_CPD.CPD('IC')
+                case.get_xml_response()
+            except:
+                pass
+        elif userSelection == 'back':
+            self.cpd_menu()
+        elif userSelection == 'exit':
+            sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.cpd_xml_response()
+        self.cpd_xml_response()
+
+    def cpd_xml_response(self):
+        self.cls()
+        print('CPD Scrape Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] All [back] Back to CPD Menu [exit] Exit Program')
+        userSelection = input('What would you like to do?: ')
+        if userSelection == '1':
+            koh = XML_CPD.CPD('KOH')
             koh.get_update()
         elif userSelection == '2':
             tec = XML_CPD.CPD('TEC')
@@ -174,7 +220,6 @@ class User_Interface:
             print('That is not a valid selection please choose from the available options')
             self.cpd_xml_menu()
         self.cpd_xml_menu()
-
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
