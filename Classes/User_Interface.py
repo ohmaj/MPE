@@ -131,7 +131,7 @@ class User_Interface:
 
     def cpd_xml_response(self):
         self.cls()
-        print('CPD Scrape Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] All [back] Back to CPD Menu [exit] Exit Program')
+        print('CPD Scrape Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] AYP [6]All [back] Back to CPD Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             koh = XML_CPD.CPD('KOH')
@@ -146,6 +146,9 @@ class User_Interface:
             ic = XML_CPD.CPD('IC')
             ic.get_xml_response()
         elif userSelection == '5':
+            ayp = XML_CPD.CPD('AYP')
+            ayp.get_xml_response()
+        elif userSelection == '6':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.get_xml_response()
@@ -166,6 +169,11 @@ class User_Interface:
                 case.get_xml_response()
             except:
                 pass
+            try:
+                ayp = XML_CPD.CPD('AYP')
+                ayp.get_xml_response()
+            except:
+                pass
         elif userSelection == 'back':
             self.cpd_menu()
         elif userSelection == 'exit':
@@ -177,7 +185,7 @@ class User_Interface:
 
     def cpd_xml_menu(self):
         self.cls()
-        print('CPD XML Response Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] All [back] Back to CPD Menu [exit] Exit Program')
+        print('CPD XML Response Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] AYP [6] All [back] Back to CPD Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             koh = XML_CPD.CPD('KOH')
@@ -192,6 +200,9 @@ class User_Interface:
             ic = XML_CPD.CPD('IC')
             ic.get_update()
         elif userSelection == '5':
+            ayp = XML_CPD.CPD('AYP')
+            ayp.get_xml_response()
+        elif userSelection == '6':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.get_update()
@@ -210,6 +221,11 @@ class User_Interface:
             try:
                 case = XML_CPD.CPD('IC')
                 case.get_update()
+            except:
+                pass
+            try:
+                ayp = XML_CPD.CPD('AYP')
+                ayp.get_xml_response()
             except:
                 pass
         elif userSelection == 'back':
