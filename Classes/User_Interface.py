@@ -75,14 +75,14 @@ class User_Interface:
         print('Oscar Wilson Menu \n ------------ \n [1] MTD [2] Maruyama [3] AYP [back] Back to Main Menu [exit] Exit Program')
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
-            mtd_update = From_File_OscarWilson.Update_Inventory('MTD')
-            mtd_update.get_update()
+            mtd = From_File_OscarWilson.Update_Inventory('MTD')
+            mtd.get_update()
         if userSelection == '2':
-            mar_update = From_File_OscarWilson.Update_Inventory('MAR')
-            mar_update.get_update()
+            mar = From_File_OscarWilson.Update_Inventory('MAR')
+            mar.get_update()
         if userSelection == '3':
-            mar_update = From_File_OscarWilson.Update_Inventory('AYP')
-            mar_update.get_update()
+            ayp = From_File_OscarWilson.Update_Inventory('AYP')
+            ayp.get_update()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
