@@ -56,6 +56,11 @@ class User_Interface:
             self.main_menu()
         elif userSelection == 'exit':
             sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.aip_menu()
+
+        self.aip_menu()
 
     def cpd_menu(self):
         self.cls()
@@ -69,6 +74,11 @@ class User_Interface:
             self.main_menu()
         elif userSelection == 'exit':
             sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.cpd_menu()
+
+        self.cpd_menu()
 
     def ow_menu(self):
         self.cls()
@@ -87,6 +97,11 @@ class User_Interface:
             self.main_menu()
         elif userSelection == 'exit':
             sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.ow_menu()
+
+        self.ow_menu()
 
     def kawasaki_menu(self):
         self.cls()
@@ -99,6 +114,11 @@ class User_Interface:
             self.main_menu()
         elif userSelection == 'exit':
             sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.kawasaki_menu()
+
+        self.kawasaki_menu()
 
     def ariens_menu(self):
         self.cls()
@@ -111,6 +131,11 @@ class User_Interface:
             self.main_menu()
         elif userSelection == 'exit':
             sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.ariens_menu()
+
+        self.ariens_menu()
 
     def golden_eagle_menu(self):
         self.cls()
@@ -131,6 +156,10 @@ class User_Interface:
             self.main_menu()
         elif userSelection == 'exit':
             sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.golden_eagle_menu()
+        self.golden_eagle_menu()
 
     def cpd_xml_response(self):
         self.cls()
