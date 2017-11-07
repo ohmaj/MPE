@@ -46,6 +46,17 @@ class CPD:
             i += 1
         self.write_data_set_to_csv(parsed_data_set)
 
+    def get_xml_response(self):
+        i = 1
+        xml_inquiries = list(self.get_xml())
+        for inquiry in xml_inquiries:
+            response = self.get_cpd_response(inquiry)
+            file_path = self.errors_filepath + self.mfr + '_Api_Response' +str(i)+ '.xml'
+            temp_writer = open(file_path, 'w')
+            temp_writer.write(response.text)
+            temp_writer.close()
+            i += 1
+
     def get_new_listings(self):
         xml_inquiries = list(self.get_xml())
         parsed_data_set = []
