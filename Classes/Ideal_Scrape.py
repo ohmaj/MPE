@@ -43,7 +43,6 @@ class database_connection():
         item['MFR'] = mfr
         item['Ideal SKU'] = '['+mfr+']['+item['Product ID'].replace(' ', '').replace('-', '').strip('[]').lstrip('0')+']'
         item['eBay Product SKU Number'] = ebay_product_number
-        print(item['Ideal SKU'])
         return item
 
 
@@ -70,9 +69,25 @@ class database_connection():
         return (ideal_dataset)
 
     def write_dict_to_csv(self, updated_products):
+        ordered_dicts = [{'Item ID': product['Item ID'],
+                          'External Item ID': product['External Item ID'],
+                          'SKU': product['SKU'],
+                          'Product ID': product['Product ID'],
+                          'Storage Location': product['Storage Location'],
+                          'Quantity': product['Quantity'],
+                          'Cost': product['Cost'],
+                          'Supplier ID': product['Supplier ID'],
+                          'Supplier Account Num': product['Supplier Account Num'],
+                          'Supplier Name': product['Supplier Name'],
+                          'Date Purchased': product['Date Purchased'],
+                          'Fulfillment Source': 'Self',
+                          'PO Number': product['PO Number'],
+                          'Invoice Number': product['Invoice Number'],
+                          'Action': 'Reconcileto'
+                          } for product in updated_products]
         print('Writing File....')
-        keys = updated_products[0].keys()
+        keys = ordered_dicts[0].keys()
         with open(self.save_to_filepath, 'a', newline='') as csv_file:
             dict_writer = csv.DictWriter(csv_file, keys)
             dict_writer.writeheader()
-            dict_writer.writerows(updated_products)
+            dict_writer.writerows(ordered_dicts)
