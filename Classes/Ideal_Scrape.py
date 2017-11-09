@@ -7,7 +7,8 @@ class database_connection():
     def __init__(self):
         self.product_ids_filepaths = [r'T:/ebay/ARN/inventory/ProductIds.csv',r'T:/ebay/KAW/inventory/ProductIds.csv',r'T:/ebay/ECH/inventory/ProductIds.csv',r'T:/ebay/BIL/inventory/ProductIds.csv',
                                       r'T:/ebay/TEC/inventory/ProductIds.csv',r'T:/ebay/IC/inventory/ProductIds.csv',r'T:/ebay/HYD/inventory/ProductIds.csv',r'T:/ebay/KOH/inventory/ProductIds.csv',
-                                      r'T:/ebay/MTD/inventory/ProductIds.csv',r'T:/ebay/AIP/inventory/ProductIds.csv',r'T:/ebay/STE/inventory/ProductIds.csv']
+                                      r'T:/ebay/MTD/inventory/ProductIds.csv',r'T:/ebay/AIP/inventory/ProductIds.csv',r'T:/ebay/STE/inventory/ProductIds.csv',r'T:/ebay/MART/inventory/ProductIds.csv',
+                                      r'T:/ebay/AYP/inventory/ProductIds.csv']
         self.save_to_filepath = r'T:/ebay/All/inventory/'+ 'Self_Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
     def main(self):
