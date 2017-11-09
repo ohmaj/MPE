@@ -82,6 +82,8 @@ class CPD:
             i = 0
             xml_request = self.xml_header
             while i < self.inquiry_limit and count < (data_set_count):
+                if data_set[count]['MFR'] == 'MART':
+                    data_set[count]['MFR'] = 'MAR'
                 xml_dataPoint = self.get_xml_datapoint(data_set[count])
                 xml_request = xml_request+xml_dataPoint
                 i += 1
