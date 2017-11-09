@@ -235,6 +235,9 @@ class User_Interface:
             ayp = XML_CPD.CPD('AYP')
             ayp.get_update()
         elif userSelection == '6':
+            mart = XML_CPD.CPD('MART')
+            mart.get_update()
+        elif userSelection == '7':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.get_update()
@@ -258,6 +261,11 @@ class User_Interface:
             try:
                 ayp = XML_CPD.CPD('AYP')
                 ayp.get_update()
+            except:
+                pass
+            try:
+                mart = XML_CPD.CPD('MART')
+                mart.get_update()
             except:
                 pass
         elif userSelection == 'back':
