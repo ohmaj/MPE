@@ -52,7 +52,10 @@ class Scrape_Distributor(object):
         count = 1
         total = len(products)
         for item in products:
-            item['Quantity'] = 'Error'
+            if count%500 == 0:
+                browser.quit()
+                browser = webdriver.Chrome()
+                self.login(browser)
             try:
             #     goto part page
                 self.load_product(item['Product ID'], browser)
