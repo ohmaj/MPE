@@ -82,8 +82,6 @@ class CPD:
             i = 0
             xml_request = self.xml_header
             while i < self.inquiry_limit and count < (data_set_count):
-                if data_set[count]['MFR'] == 'MART':
-                    data_set[count]['MFR'] = 'MAR'
                 xml_dataPoint = self.get_xml_datapoint(data_set[count])
                 xml_request = xml_request+xml_dataPoint
                 i += 1
@@ -148,7 +146,10 @@ class CPD:
             i +=1
 
     def get_xml_datapoint(self, data_point):
-        smart_order = ('<SmartOrder><CustomerNumber>'+data_point['Supplier ID']+'</CustomerNumber><ManufacturerCode>'+self.mfr+'</ManufacturerCode><PartNumber>'+data_point['Product ID']+'</PartNumber><Quantity>10</Quantity><ClientNoSupNLA/><UPCCode/><InquirySequenceNumber/><CustomerInternalSKU>'+data_point['Item ID']+'</CustomerInternalSKU></SmartOrder>')
+        mfr = self.mfr
+        if mfr == 'MART':
+            mfr = 'MAR'
+        smart_order = ('<SmartOrder><CustomerNumber>'+data_point['Supplier ID']+'</CustomerNumber><ManufacturerCode>'+mfr+'</ManufacturerCode><PartNumber>'+data_point['Product ID']+'</PartNumber><Quantity>10</Quantity><ClientNoSupNLA/><UPCCode/><InquirySequenceNumber/><CustomerInternalSKU>'+data_point['Item ID']+'</CustomerInternalSKU></SmartOrder>')
         return(smart_order)
 
     def write_data_set_to_csv(self, data_set):
