@@ -87,10 +87,10 @@ class User_Interface:
         if userSelection == '1':
             mtd = From_File_OscarWilson.Update_Inventory('MTD')
             mtd.get_update()
-        if userSelection == '2':
+        elif userSelection == '2':
             mar = From_File_OscarWilson.Update_Inventory('MAR')
             mar.get_update()
-        if userSelection == '3':
+        elif userSelection == '3':
             ayp = From_File_OscarWilson.Update_Inventory('AYP')
             ayp.get_update()
         elif userSelection == 'back':
