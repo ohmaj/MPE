@@ -3,6 +3,7 @@ from Classes import Distributor_Golden_Eagle
 from Classes import Distributor_Ariens
 from Classes import Distributor_AIP
 from Classes import From_File_OscarWilson
+from Classes import From_File_Stens
 from Classes import XML_CPD
 from Classes import Ideal_Scrape
 import time
@@ -35,6 +36,8 @@ class Run_All:
         mtd.save_to_filepath = results_filepath
         mar = From_File_OscarWilson.Update_Inventory('MAR')
         mar.save_to_filepath = results_filepath
+        ste = From_File_Stens.Update_Inventory()
+        ste.save_to_filepath = results_filepath
         ideal = Ideal_Scrape.database_connection()
         ideal.save_to_filepath = results_filepath
         try:
@@ -62,6 +65,11 @@ class Run_All:
             mar_success = 'MAR Update Successful'
         except:
             mar_success = 'Error Updating MAR'
+        try:
+            ste.get_update()
+            ste_success = 'Stens Update Successful'
+        except:
+            ste_success = 'Error Updating Stens'
         try:
             ic.get_update()
             ic_success = 'Case Update Successful'
@@ -97,7 +105,7 @@ class Run_All:
             ideal_success ='Self Update Successful'
         except:
             ideal_success ='Error Updating Self'
-        print_list = [mtd_success, mar_success, ic_success, hyd_success, tec_success, koh_success, ech_success, bil_success, arn_success, aip_success, kaw_success, ideal_success]
+        print_list = [mtd_success, mar_success,ste_success, ic_success, hyd_success, tec_success, koh_success, ech_success, bil_success, arn_success, aip_success, kaw_success, ideal_success]
         for item in print_list:
             print(item)
         input('Press Enter To Finish')
