@@ -52,7 +52,7 @@ class Scrape_Distributor(object):
         count = 1
         total = len(products)
         for item in products:
-            if count%500 == 0:
+            if count%250 == 0:
                 browser.quit()
                 browser = webdriver.Chrome()
                 self.login(browser)
