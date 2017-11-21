@@ -41,67 +41,67 @@ class Run_All:
         ideal = Ideal_Scrape.database_connection()
         ideal.save_to_filepath = results_filepath
         try:
-            ech.scrape_inventory()
+            ech.write_inventory()
             ech_success ='Echo Update Successful'
         except:
             ech_success ='Error Updating Echo'
         try:
-            bil.scrape_inventory()
+            bil.write_inventory()
             bil_success ='Billy Goat Update Successful'
         except:
             bil_success ='Error Updating BillyGoat'
         try:
-            aip.scrape_inventory()
+            aip.write_inventory()
             aip_success ='A&I Update Successful'
         except:
             aip_success ='Error Updating A&I'
         try:
-            mtd.get_update()
+            mtd.write_inventory()
             mtd_success = 'MTD Update Successful'
         except:
             mtd_success = 'Error Updating MTD'
         try:
-            mar.get_update()
+            mar.write_inventory()
             mar_success = 'MAR Update Successful'
         except:
             mar_success = 'Error Updating MAR'
         try:
-            ste.get_update()
+            ste.write_inventory()
             ste_success = 'Stens Update Successful'
         except:
             ste_success = 'Error Updating Stens'
         try:
-            ic.get_update()
+            ic.write_inventory()
             ic_success = 'Case Update Successful'
         except:
             ic_success = 'Error Updating Case'
         try:
-            hyd.get_update()
+            hyd.write_inventory()
             hyd_success ='Hydro Gear Update Successful'
         except:
             hyd_success ='Error Updating Hydro Gear'
         try:
-            tec.get_update()
+            tec.write_inventory()
             tec_success ='Tecumseh Update Successful'
         except:
             tec_success ='Error Updating Tecumseh'
         try:
-            koh.get_update()
+            koh.write_inventory()
             koh_success ='Kohler Update Successful'
         except:
             koh_success ='Error Updating Kohler'
         try:
-            arn.scrape_inventory()
+            arn.write_inventory()
             arn_success ='Ariens Update Successful'
         except:
             arn_success ='Error Updating Ariens'
         try:
-            kaw.scrape_inventory()
+            kaw.write_inventory()
             kaw_success = 'Kawasaki Update Successful'
         except:
             kaw_success = 'Error Updating Kawasaki'
         try:
-            ideal.main()
+            ideal.write_inventory()
             ideal_success ='Self Update Successful'
         except:
             ideal_success ='Error Updating Self'

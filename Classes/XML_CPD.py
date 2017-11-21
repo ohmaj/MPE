@@ -19,7 +19,7 @@ class CPD:
         self.xml_footer = '</inventory_request>'
         self.inquiry_limit = 1000
 
-    def get_update(self):
+    def write_inventory(self):
         xml_inquiries = list(self.get_xml())
         parsed_data_set = []
         i = 1

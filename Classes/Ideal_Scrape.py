@@ -11,7 +11,7 @@ class database_connection():
                                       r'T:/ebay/AYP/inventory/ProductIds.csv']
         self.save_to_filepath = r'T:/ebay/All/inventory/'+ 'Self_Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
-    def main(self):
+    def write_inventory(self):
         product_ids_dataset = list(self.get_product_ids_dataset())
         ideal_dataset = self.get_ideal_dataseet()
         for product in product_ids_dataset:

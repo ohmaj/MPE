@@ -29,7 +29,7 @@ class User_Interface:
             self.ow_menu()
         elif userSelection == '7':
             ideal = Ideal_Scrape.database_connection()
-            ideal.main()
+            ideal.write_inventory()
         elif userSelection == '8':
             all = Run_All.Run_All()
             all.run()
@@ -51,7 +51,7 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             aip = Distributor_AIP.AIP('AIP')
-            aip.scrape_inventory()
+            aip.write_inventory()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
@@ -86,13 +86,13 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             mtd = From_File_OscarWilson.Update_Inventory('MTD')
-            mtd.get_update()
+            mtd.write_inventory()
         elif userSelection == '2':
             mar = From_File_OscarWilson.Update_Inventory('MAR')
-            mar.get_update()
+            mar.write_inventory()
         elif userSelection == '3':
             ayp = From_File_OscarWilson.Update_Inventory('AYP')
-            ayp.get_update()
+            ayp.write_inventory()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
@@ -109,7 +109,7 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             kaw = Distributor_Kawasaki.Kawasaki('KAW')
-            kaw.scrape_inventory()
+            kaw.write_inventory()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
@@ -126,7 +126,7 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             ariens = Distributor_Ariens.Ariens('ARN')
-            ariens.scrape_inventory()
+            ariens.write_inventory()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
@@ -143,15 +143,15 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
-            ech.scrape_inventory()
+            ech.write_inventory()
         elif userSelection == '2':
             bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
-            bil.scrape_inventory()
+            bil.write_inventory()
         elif userSelection == '3':
             ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
             bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
-            ech.scrape_inventory()
-            bil.scrape_inventory()
+            ech.write_inventory()
+            bil.write_inventory()
         elif userSelection == 'back':
             self.main_menu()
         elif userSelection == 'exit':
@@ -221,51 +221,51 @@ class User_Interface:
         userSelection = input('What would you like to do?: ')
         if userSelection == '1':
             koh = XML_CPD.CPD('KOH')
-            koh.get_update()
+            koh.write_inventory()
         elif userSelection == '2':
             tec = XML_CPD.CPD('TEC')
-            tec.get_update()
+            tec.write_inventory()
         elif userSelection == '3':
             hyg = XML_CPD.CPD('HYD')
-            hyg.get_update()
+            hyg.write_inventory()
         elif userSelection == '4':
             ic = XML_CPD.CPD('IC')
-            ic.get_update()
+            ic.write_inventory()
         elif userSelection == '5':
             ayp = XML_CPD.CPD('AYP')
-            ayp.get_update()
+            ayp.write_inventory()
         elif userSelection == '6':
             mart = XML_CPD.CPD('MART')
-            mart.get_update()
+            mart.write_inventory()
         elif userSelection == '7':
             try:
                 koh = XML_CPD.CPD('KOH')
-                koh.get_update()
+                koh.write_inventory()
             except:
                 pass
             try:
                 tec = XML_CPD.CPD('TEC')
-                tec.get_update()
+                tec.write_inventory()
             except:
                 pass
             try:
                 hyg = XML_CPD.CPD('HYD')
-                hyg.get_update()
+                hyg.write_inventory()
             except:
                 pass
             try:
                 case = XML_CPD.CPD('IC')
-                case.get_update()
+                case.write_inventory()
             except:
                 pass
             try:
                 ayp = XML_CPD.CPD('AYP')
-                ayp.get_update()
+                ayp.write_inventory()
             except:
                 pass
             try:
                 mart = XML_CPD.CPD('MART')
-                mart.get_update()
+                mart.write_inventory()
             except:
                 pass
         elif userSelection == 'back':

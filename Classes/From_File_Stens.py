@@ -8,7 +8,7 @@ class Update_Inventory:
         self.currently_running_file_path = 'T:/ebay/STE/inventory/ProductIds.csv'
         self.save_to_filepath = 'T:/ebay/STE/inventory/STE_Updated_Inventory.'+time.strftime("%m%d%Y"+'.'+"%I%M")+'.csv'
 
-    def get_update(self):
+    def write_inventory(self):
         data_set_from_ow = self.read_from_ste()
         data_set_running_listings = self.read_current_running()
         joined_data_set = list(self.join_on_key(data_set_from_ow, data_set_running_listings))

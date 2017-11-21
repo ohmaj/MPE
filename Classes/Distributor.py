@@ -13,7 +13,7 @@ class Scrape_Distributor(object):
         self.product_source_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/ProductIds.csv'
         self.save_to_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/' + self.manufacturer + 'Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
-    def scrape_inventory(self):
+    def write_inventory(self):
         try:
             credentials = User_Info.Credentials(self.manufacturer)
             credentials.get_account_credentials()
