@@ -39,12 +39,6 @@ class CPD:
             i += 1
         self.write_data_set_to_csv(parsed_data_set)
 
-    def write_xml(self):
-        xml_inquiries = list(self.get_xml())
-        for inquiry in xml_inquiries:
-            response = self.get_cpd_response(inquiry)
-            self.write_api_files(inquiry, response)
-
     def get_inventory(self):
         xml_inquiries = list(self.get_xml())
         parsed_data_set = []
