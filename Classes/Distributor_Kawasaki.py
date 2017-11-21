@@ -14,7 +14,7 @@ class Kawasaki(Distributor.Scrape_Distributor):
 
     def parse_scrape(self, item, htmlScrape):
         tree = html.fromstring(htmlScrape)
-        availability_imgs = tree.xpath('//*[@id="product-detail"]//img/@src')
+        availability_imgs = tree.xpath('//*[@id="product-detail"]/tbody/tr[5]//img/@src')
         cost = tree.xpath('//*[@id="product-detail"]/tbody/tr[2]/td[2]/text()')
         availability = '0'
         if len(availability_imgs) > 0:

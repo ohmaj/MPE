@@ -59,7 +59,6 @@ class Update_Inventory:
         ordered_dicts = [{'Item ID': product['Item ID'],
                           'External Item ID': product['External Item ID'],
                           'SKU': product['SKU'],
-                          'TEMPSKU': product['TEMPSKU'],
                           'Product ID': product['Product ID'],
                           'Storage Location': product['Storage Location'],
                           'Quantity': product['Quantity'],
