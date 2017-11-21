@@ -14,14 +14,7 @@ class Scrape_Distributor(object):
         self.save_to_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/' + self.manufacturer + 'Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
     def write_inventory(self):
-        try:
-            credentials = User_Info.Credentials(self.manufacturer)
-            credentials.get_account_credentials()
-            credentials.set_logon_info()
-            self.username = credentials.username
-            self.password = credentials.password
-        except:
-            pass
+        self.set_credentials()
         global browser
         browser = webdriver.Chrome()
         self.login(browser)
@@ -32,6 +25,16 @@ class Scrape_Distributor(object):
         self.write_dict_to_csv(updated_products)
         try:
             browser.close()
+        except:
+            pass
+
+    def set_credentials(self):
+        try:
+            credentials = User_Info.Credentials(self.manufacturer)
+            credentials.get_account_credentials()
+            credentials.set_logon_info()
+            self.username = credentials.username
+            self.password = credentials.password
         except:
             pass
 
