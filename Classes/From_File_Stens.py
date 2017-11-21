@@ -14,6 +14,12 @@ class Update_Inventory:
         joined_data_set = list(self.join_on_key(data_set_from_ow, data_set_running_listings))
         self.write_new_inventory(joined_data_set)
 
+    def get_inventory(self):
+        data_set_from_ow = self.read_from_ste()
+        data_set_running_listings = self.read_current_running()
+        joined_data_set = list(self.join_on_key(data_set_from_ow, data_set_running_listings))
+        return(joined_data_set)
+
 
     def read_from_ste(self):
         dict = {}

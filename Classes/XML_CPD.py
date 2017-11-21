@@ -29,16 +29,7 @@ class CPD:
             try:
                 response = self.get_cpd_response(inquiry)
             except:
-                # ---------------- write inquiry to file for error checking--------------
-                file_path = self.errors_filepath + self.mfr + '_Api_Inquiry'+str(i)+'.xml'
-                temp_writer = open(file_path, 'w')
-                temp_writer.write(inquiry)
-                temp_writer.close()
-                # -----------------write response to file for error checking---------------
-                file_path = self.errors_filepath + self.mfr + '_Api_Response' +str(i)+ '.xml'
-                temp_writer = open(file_path, 'w')
-                temp_writer.write(response.text)
-                temp_writer.close()
+                self.write_api_files(inquiry, response)
             try:
                 parsed_data_points = list(self.parse_xml_response_for_ebay_listing(response))
                 for point in parsed_data_points:
@@ -47,6 +38,38 @@ class CPD:
                 pass
             i += 1
         self.write_data_set_to_csv(parsed_data_set)
+
+    def get_inventory(self):
+        xml_inquiries = list(self.get_xml())
+        parsed_data_set = []
+        i = 1
+        count = len(xml_inquiries)
+        for inquiry in xml_inquiries:
+            print(self.mfr + ' Getting Response: ' + str(i) + ' of ' + str(count))
+            try:
+                response = self.get_cpd_response(inquiry)
+            except:
+                self.write_api_files(inquiry, response)
+            try:
+                parsed_data_points = list(self.parse_xml_response_for_ebay_listing(response))
+                for point in parsed_data_points:
+                    parsed_data_set.append(point)
+            except:
+                pass
+            i += 1
+        return(parsed_data_set)
+
+    def write_api_files(self, inquiry, response):
+        # ---------------- write inquiry to file for error checking--------------
+        file_path = self.errors_filepath + self.mfr + '_Api_Inquiry' + str(i) + '.xml'
+        temp_writer = open(file_path, 'w')
+        temp_writer.write(inquiry)
+        temp_writer.close()
+        # -----------------write response to file for error checking---------------
+        file_path = self.errors_filepath + self.mfr + '_Api_Response' + str(i) + '.xml'
+        temp_writer = open(file_path, 'w')
+        temp_writer.write(response.text)
+        temp_writer.close()
 
     def get_xml_response(self):
         i = 1

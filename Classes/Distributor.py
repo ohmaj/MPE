@@ -28,6 +28,21 @@ class Scrape_Distributor(object):
         except:
             pass
 
+    def get_inventory(self):
+        self.set_credentials()
+        global browser
+        browser = webdriver.Chrome()
+        self.login(browser)
+        # get data set
+        products = list(self.get_product_list())
+        # iterate through data set
+        updated_products = list(self.get_distributor_inventory(products, browser))
+        try:
+            browser.close()
+        except:
+            pass
+        return(updated_products)
+
     def set_credentials(self):
         try:
             credentials = User_Info.Credentials(self.manufacturer)

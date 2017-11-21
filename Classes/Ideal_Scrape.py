@@ -27,6 +27,22 @@ class database_connection():
                 product['Quantity'] = '0'
         self.write_dict_to_csv(product_ids_dataset)
 
+    def get_inventory(self):
+        product_ids_dataset = list(self.get_product_ids_dataset())
+        ideal_dataset = self.get_ideal_dataseet()
+        for product in product_ids_dataset:
+            product['Fulfillment Source'] = 'self'
+            product['Action'] = 'Reconcileto'
+            try:
+                sku = product['Ideal SKU']
+                try:
+                    product['Quantity'] = ideal_dataset[sku]['ONHANDAVAILABLEQUANTITY']
+                except:
+                    product['Quantity'] = '0'
+            except:
+                product['Quantity'] = '0'
+        return(product_ids_dataset)
+
     def get_product_ids_dataset(self):
         for mfr_ids_filepath in self.product_ids_filepaths:
             with open(mfr_ids_filepath, encoding="utf8") as f:
