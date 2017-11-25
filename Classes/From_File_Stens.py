@@ -30,7 +30,6 @@ class Update_Inventory:
                 'Qty Available': row[1],
             } for row in csv.reader(f)]
             for item in list(products):
-                print(item['TEMPSKU'])
                 dict[item['TEMPSKU']] = item
             return dict
 
