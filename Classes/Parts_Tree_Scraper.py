@@ -7,14 +7,22 @@ import os
 
 class Parts_Tree_Scraper:
 
-    def __init__(self):
-        self.product_ids_filepath = r'T:\ebay\AYP\Temp New Listings\ProductIds.csv' #product_ids_filepath
-        self.results_filepath = r'T:\ebay\AYP\Temp New Listings\Parts_Tree' + time.strftime("%m%d%Y"+'.'+"%I%M") + '.csv'
+    def __init__(self, mfr_code, mfr_name):
+        self.mfr_code = mfr_code
+        self.mfr_name = mfr_name
+        self.product_ids_filepath = r'T:/ebay/'+ mfr_code +'/Data/New_Listings/ProductIds.csv'
+        self.results_filepath = r'T:/ebay/'+ mfr_code +'/Data/New_Listings/Parts_Tree' + time.strftime("%m%d%Y"+'.'+"%I%M") + '.csv'
 
-    def run(self):
+    def write_scrape(self):
         data_set = list(self.get_data_set())
         scraped_dataset = list(self.run_scrape(data_set))
         self.write_list_to_file(scraped_dataset)
+
+    def get_scrape_single(self, product_id, product_mfr_name):
+        url = self.construct_url(product_mfr_name, product_id)
+        parts_tree_scrape = self.scrape_part(url)
+        return (parts_tree_scrape)
+
 
     def write_list_to_file(self, list):
         with open(self.results_filepath, 'w', newline='') as csv_file:
