@@ -70,7 +70,7 @@ class Create_Ebay_Listing:
         part['Secondary Fulfillment Source'] = self.secondary_fullfillment
         part['IS_Brand'] = self.is_brand
         part['IS_MPN'] = self.is_mpn
-        part['IS_Taxable'] = self.is_taxable
+        part['IS Taxable'] = self.is_taxable
         part['IS_Item Condition'] = self.is_item_condition
         part['eBay Payment Preset Name'] = self.ebay_payment_preset_name
         part['eBay Preset Wrapper Name'] = self.ebay_preset_wrapper_name
