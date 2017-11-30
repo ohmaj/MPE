@@ -25,6 +25,7 @@ class Create_Ebay_Listing:
         self.is_brand = ''
         self.is_mpn = ''
         self.is_model = ''
+        self.is_taxable = 'TRUE'
         self.is_item_condition = 'New'
         self.ebay_payment_preset_name = ''
         self.ebay_preset_wrapper_name = ''
@@ -63,12 +64,13 @@ class Create_Ebay_Listing:
         part['Profit'] = self.profit
         part['Fixed Price'] = self.fixed_price
         part['MSRP'] = self.msrp
-        part['Lot Size'] = self.lot_size
+        part['eBay Lot Size'] = self.lot_size
         part['eBay Category1ID'] = self.ebay_category1_id
         part['Primary Fulfillment Soruce'] = self.primary_fullfillment
         part['Secondary Fulfillment Source'] = self.secondary_fullfillment
         part['IS_Brand'] = self.is_brand
         part['IS_MPN'] = self.is_mpn
+        part['IS_Taxable'] = self.is_taxable
         part['IS_Item Condition'] = self.is_item_condition
         part['eBay Payment Preset Name'] = self.ebay_payment_preset_name
         part['eBay Preset Wrapper Name'] = self.ebay_preset_wrapper_name
