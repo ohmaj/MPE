@@ -29,7 +29,7 @@ class Create_Ebay_Listing:
         self.ebay_payment_preset_name = ''
         self.ebay_preset_wrapper_name = ''
         self.ebay_description_wrapper_name = ''
-        self.where_used = 'More Information Coming Soon'
+        self.where_used = ''
         self.ebay_shipping_preset_name = ''
         self.picture_url = ''
         self.ebay_description = ''
@@ -43,7 +43,10 @@ class Create_Ebay_Listing:
         self.is_model = self.sku
 
     def set_where_used_html(self):
-        self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">Commonly Used on Models:<br /><br />' + self.where_used
+        if self.where_used == '':
+            self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">Commonly Used on Models:<br /><br /> More Information Coming Soon' + self.where_used
+        else:
+            self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">Commonly Used on Models:<br /><br />' + self.where_used
 
     def get_part_as_dict(self):
         part = {}
