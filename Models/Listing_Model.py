@@ -75,6 +75,7 @@ class Create_Ebay_Listing:
         part['eBay Description Wrapper Name'] = self.ebay_description_wrapper_name
         part['ebay Shipping Preset Name'] = self.ebay_shipping_preset_name
         part['Picture'] = self.picture_url
+        part['Pictures Manual Picture URL'] = self.picture_url
         part['eBay Description'] = self.ebay_description
         return part
 
