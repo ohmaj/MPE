@@ -58,6 +58,7 @@ class Parts_Tree_Scraper:
         page = requests.get(url)
         tree = html.fromstring(page.content)
         parts_tree_part = Parts_Tree_Model.Parts_Tree_Model()
+        parts_tree_part.compatable_machines = 'More Information Coming Soon'
         try:
             parts_tree_part.part_id = tree.xpath('/html/body/div[2]/div[2]/div[5]/div/div[2]/p[1]/span[2]/text()')[0]
         except:
