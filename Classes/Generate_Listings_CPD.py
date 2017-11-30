@@ -6,7 +6,7 @@ class ebay:
 
     def __init__(self):
         self.mfr_code = 'TEC'
-        self.mfr_name = 'tecumseh'
+        self.mfr_name = 'Tecumseh'
         self.product_ids_filepath = r'T:/ebay/'+ self.mfr_code +'/Data/New_Listings/ProductIds.csv'
         self.save_to_filepath = r'T:/ebay/' + self.mfr_code + '/Data/New_Listings/Generated_Listings' + time.strftime("%m%Y") + '.csv'
 
@@ -53,7 +53,6 @@ class ebay:
             listing.raw_title = product['Title']
             listing.where_used = product['Where Used']
             listing.msrp = product['MSRP']
-            listing.product_brand = product['MFR']
             listing.weight_pricefile = product['Weight']
             listing.cost = product['Cost']
             listing.picture_url = product['Picture']
