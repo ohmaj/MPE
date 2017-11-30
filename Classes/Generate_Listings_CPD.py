@@ -29,7 +29,7 @@ class ebay:
         for product in products:
             parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'],self.mfr_name)
             product['Picture'] = parts_tree_part.part_thumbnail_src
-            product['Where Used'] = parts_tree_part.part_description
+            product['Where Used'] = parts_tree_part.compatable_machines
             print('Getting Parts Tree Info: ' + str(int((count / total) * 100)) + '%')
             count += 1
             yield (product)
