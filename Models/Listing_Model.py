@@ -32,7 +32,7 @@ class Create_Ebay_Listing:
         self.where_used = 'More Information Coming Soon'
         self.ebay_shipping_preset_name = ''
         self.picture_url = ''
-        self.ebay_Description = ''
+        self.ebay_description = ''
 
     def set_title(self):
         self.title = 'Genuine ' + self.product_brand+' Part ' + self.raw_title + ' ' + self.sku
@@ -72,7 +72,7 @@ class Create_Ebay_Listing:
         part['eBay Description Wrapper Name'] = self.ebay_description_wrapper_name
         part['ebay Shipping Preset Name'] = self.ebay_shipping_preset_name
         part['Picture'] = self.picture_url
-        part['eBay Description'] = self.ebay_Description
+        part['eBay Description'] = self.ebay_description
         return part
 
     def set_all(self):
