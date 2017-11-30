@@ -30,9 +30,9 @@ class ebay:
             parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'],self.mfr_name)
             product['Picture'] = parts_tree_part.part_thumbnail_src
             product['Where Used'] = parts_tree_part.compatable_machines
+            self.cls()
             print('Getting Parts Tree Info: ' + str(int((count / total) * 100)) + '%')
             count += 1
-            self.cls()
             yield (product)
 
     def write_to_file(self, products):
