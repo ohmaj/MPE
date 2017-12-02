@@ -1,6 +1,8 @@
 from Models import Listing_Model
 from Classes import Parts_Tree_Scraper
-import csv, time, os
+import csv
+import time
+import os
 
 
 class Ebay:
@@ -25,11 +27,11 @@ class Ebay:
                 yield (row)
 
     def set_partstree_info(self, products):
-        parts_tree_scraper = Parts_Tree_Scraper.Parts_Tree_Scraper(self.mfr_code, self.mfr_name)
+        parts_tree_scraper = Parts_Tree_Scraper.PartsTreeScraper(self.mfr_code, self.mfr_name)
         count = 1
         total = len(products)
         for product in products:
-            parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'],self.mfr_name)
+            parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'], self.mfr_name)
             product['Picture'] = parts_tree_part.part_thumbnail_src
             product['Where Used'] = parts_tree_part.compatable_machines
             self.cls()

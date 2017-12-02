@@ -1,8 +1,8 @@
-from Classes import Distributor, User_Info
+from Classes import Distributor
 from lxml import html
-import time
 
-class Golden_Eagle(Distributor.Scrape_Distributor):
+
+class Golden_Eagle(Distributor.ScrapeDistributor):
 
     def __init__(self, manufacturer):
         super(Golden_Eagle, self).__init__(manufacturer)
@@ -42,4 +42,4 @@ class Golden_Eagle(Distributor.Scrape_Distributor):
             pass
         item['Quantity'] = availability
         item['Description'] = description
-        return (item)
+        return item

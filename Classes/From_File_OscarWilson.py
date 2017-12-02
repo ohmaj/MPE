@@ -2,12 +2,13 @@ import csv
 import time
 
 
-class Update_Inventory:
+class UpdateInventory:
     def __init__(self, mfr):
         self.mfr = mfr
         self.ow_dump_file_path = r'T:/ebay/Oscar_Wilson/McHenryDumpFile.csv'
         self.currently_running_file_path = 'T:/ebay/'+mfr+'/inventory/ProductIds.csv'
-        self.save_to_filepath = 'T:/ebay/'+mfr+'/inventory/'+mfr+'_Updated_Inventory.'+time.strftime("%m%d%Y"+'.'+"%I%M")+'.csv'
+        self.save_to_filepath = 'T:/ebay/' + mfr + '/inventory/' + mfr + '_Updated_Inventory.' \
+                                + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
     def write_inventory(self):
         data_set_from_ow = self.read_from_ow()
@@ -19,7 +20,7 @@ class Update_Inventory:
         data_set_from_ow = self.read_from_ow()
         data_set_running_listings = self.read_current_running()
         joined_data_set = list(self.join_on_key(data_set_from_ow, data_set_running_listings))
-        return (joined_data_set)
+        return joined_data_set
 
     def read_from_ow(self):
         ow_dict = {}
@@ -56,7 +57,7 @@ class Update_Inventory:
                 if self.mfr == 'AYP':
                     row['TEMPSKU'] = '[HOP][' + row['Product ID'] + ']'
                 running_dict[row['TEMPSKU']] = row
-        return (running_dict)
+        return running_dict
 
     def join_on_key(self, ow, running):
         for part, info in running.items():
@@ -71,10 +72,10 @@ class Update_Inventory:
                 info['Quantity'] = 'Error'
                 yield (info)
 
-    def get_output_data_set(self, input_data_set):
-
-        output = None
-        return output
+    # def get_output_data_set(self, input_data_set):
+    #
+    #     output = None
+    #     return output
 
     def write_new_inventory(self, updated_products):
         ordered_dicts = [{'Item ID': product['Item ID'],

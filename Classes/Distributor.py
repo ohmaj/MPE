@@ -4,14 +4,16 @@ import csv
 import os
 import selenium.webdriver as webdriver
 
-class Scrape_Distributor(object):
+
+class ScrapeDistributor(object):
 
     def __init__(self, manufacturer):
         self.manufacturer = manufacturer
         self.username = None
         self.password = None
         self.product_source_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/ProductIds.csv'
-        self.save_to_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/' + self.manufacturer + 'Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
+        self.save_to_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/' + self.manufacturer + 'Scrape' + \
+                                time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
     def write_inventory(self):
         self.set_credentials()
@@ -41,7 +43,7 @@ class Scrape_Distributor(object):
             browser.close()
         except:
             pass
-        return(updated_products)
+        return updated_products
 
     def set_credentials(self):
         try:
@@ -75,13 +77,13 @@ class Scrape_Distributor(object):
                 browser = webdriver.Chrome()
                 self.login(browser)
             try:
-            #     goto part page
+                # goto part page
                 self.load_product(item['Product ID'], browser)
-            #     scrape part page
+                # scrape part page
                 scrape = self.scrape_page(browser)
-            #     parse scrape
+                # parse scrape
                 updated_part = self.parse_scrape(item, scrape)
-            #     return parse
+                # return parse
                 self.cls()
                 print('Scrape Progress: ' + str(int((count / total) * 100)) + '%')
                 count += 1
@@ -102,26 +104,26 @@ class Scrape_Distributor(object):
         pass
 
     def scrape_page(self, browser):
-        return (browser.page_source)
+        return browser.page_source
 
     def parse_scrape(self, item, scrape):
         pass
 
     def write_dict_to_csv(self, updated_products):
-        ordered_dicts = [{'Item ID' : product['Item ID'],
-                          'External Item ID':product['External Item ID'],
-                          'SKU' : product['SKU'],
-                          'Product ID' : product['Product ID'],
-                          'Storage Location' : product['Storage Location'],
-                          'Quantity' : product['Quantity'],
-                          'Cost' : product['Cost'],
-                          'Supplier ID' : product['Supplier ID'],
-                          'Supplier Account Num' : product['Supplier Account Num'],
-                          'Supplier Name' : product['Supplier Name'],
-                          'Date Purchased' : product['Date Purchased'],
+        ordered_dicts = [{'Item ID': product['Item ID'],
+                          'External Item ID': product['External Item ID'],
+                          'SKU': product['SKU'],
+                          'Product ID': product['Product ID'],
+                          'Storage Location': product['Storage Location'],
+                          'Quantity': product['Quantity'],
+                          'Cost': product['Cost'],
+                          'Supplier ID': product['Supplier ID'],
+                          'Supplier Account Num': product['Supplier Account Num'],
+                          'Supplier Name': product['Supplier Name'],
+                          'Date Purchased': product['Date Purchased'],
                           'Fulfillment Source': 'Drop Shipper',
-                          'PO Number' : product['PO Number'],
-                          'Invoice Number' : product['Invoice Number'],
+                          'PO Number': product['PO Number'],
+                          'Invoice Number': product['Invoice Number'],
                           'Action': 'Reconcileto',
                           'Error': product['Error']
                           } for product in updated_products]

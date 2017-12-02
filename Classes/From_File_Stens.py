@@ -18,20 +18,19 @@ class Update_Inventory:
         data_set_from_ow = self.read_from_ste()
         data_set_running_listings = self.read_current_running()
         joined_data_set = list(self.join_on_key(data_set_from_ow, data_set_running_listings))
-        return(joined_data_set)
-
+        return joined_data_set
 
     def read_from_ste(self):
-        dict = {}
+        new_dict = {}
         with open(self.ow_dump_file_path) as f:
             products = [{
                 'Product ID': row[0],
-                'TEMPSKU': '[STE]['+row[0].replace('-','')+']',
+                'TEMPSKU': '[STE]['+row[0].replace('-', '')+']',
                 'Qty Available': row[1],
             } for row in csv.reader(f)]
             for item in list(products):
-                dict[item['TEMPSKU']] = item
-            return dict
+                new_dict[item['TEMPSKU']] = item
+            return new_dict
 
     def read_current_running(self):
         running_dict = {}
@@ -41,9 +40,9 @@ class Update_Inventory:
                 del row['Title']
                 row['Fulfillment Source'] = 'Drop Shipper'
                 row['Action'] = 'Reconcileto'
-                row['TEMPSKU'] = '[STE][' + row['Product ID'].replace('-','') + ']'
+                row['TEMPSKU'] = '[STE][' + row['Product ID'].replace('-', '') + ']'
                 running_dict[row['TEMPSKU']] = row
-        return (running_dict)
+        return running_dict
 
     def join_on_key(self, ow, running):
         for part, info in running.items():
@@ -55,10 +54,10 @@ class Update_Inventory:
                 info['Quantity'] = 'Error'
                 yield (info)
 
-    def get_output_data_set(self, input_data_set):
-
-        output = None
-        return output
+    # def get_output_data_set(self, input_data_set):
+    #
+    #     output = None
+    #     return output
 
     def write_new_inventory(self, updated_products):
         ordered_dicts = [{'Item ID': product['Item ID'],

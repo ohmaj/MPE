@@ -3,13 +3,19 @@ import csv
 import time
 import re
 
-class database_connection():
+
+class DatabaseConnection:
+
     def __init__(self):
-        self.product_ids_filepaths = [r'T:/ebay/ARN/inventory/ProductIds.csv',r'T:/ebay/KAW/inventory/ProductIds.csv',r'T:/ebay/ECH/inventory/ProductIds.csv',r'T:/ebay/BIL/inventory/ProductIds.csv',
-                                      r'T:/ebay/TEC/inventory/ProductIds.csv',r'T:/ebay/IC/inventory/ProductIds.csv',r'T:/ebay/HYD/inventory/ProductIds.csv',r'T:/ebay/KOH/inventory/ProductIds.csv',
-                                      r'T:/ebay/MTD/inventory/ProductIds.csv',r'T:/ebay/AIP/inventory/ProductIds.csv',r'T:/ebay/STE/inventory/ProductIds.csv',r'T:/ebay/MART/inventory/ProductIds.csv',
+        self.product_ids_filepaths = [r'T:/ebay/ARN/inventory/ProductIds.csv', r'T:/ebay/KAW/inventory/ProductIds.csv',
+                                      r'T:/ebay/ECH/inventory/ProductIds.csv', r'T:/ebay/BIL/inventory/ProductIds.csv',
+                                      r'T:/ebay/TEC/inventory/ProductIds.csv', r'T:/ebay/IC/inventory/ProductIds.csv',
+                                      r'T:/ebay/HYD/inventory/ProductIds.csv', r'T:/ebay/KOH/inventory/ProductIds.csv',
+                                      r'T:/ebay/MTD/inventory/ProductIds.csv', r'T:/ebay/AIP/inventory/ProductIds.csv',
+                                      r'T:/ebay/STE/inventory/ProductIds.csv', r'T:/ebay/MART/inventory/ProductIds.csv',
                                       r'T:/ebay/AYP/inventory/ProductIds.csv']
-        self.save_to_filepath = r'T:/ebay/All/inventory/'+ 'Self_Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
+        self.save_to_filepath = r'T:/ebay/All/inventory/' + 'Self_Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") \
+                                + '.csv'
 
     def write_inventory(self):
         product_ids_dataset = list(self.get_product_ids_dataset())
@@ -41,7 +47,7 @@ class database_connection():
                     product['Quantity'] = '0'
             except:
                 product['Quantity'] = '0'
-        return(product_ids_dataset)
+        return product_ids_dataset
 
     def get_product_ids_dataset(self):
         for mfr_ids_filepath in self.product_ids_filepaths:
@@ -50,7 +56,7 @@ class database_connection():
                 for row in reader:
                     del row['Title']
                     parsed_row = self.parse_item_sku(row)
-                    yield (parsed_row)
+                    yield parsed_row
 
     def parse_item_sku(self, item):
         sku = item['SKU']
@@ -58,10 +64,10 @@ class database_connection():
         mfr = parsed_sku[0]
         ebay_product_number = sku[2]
         item['MFR'] = mfr
-        item['Ideal SKU'] = '['+mfr+']['+item['Product ID'].replace(' ', '').replace('-', '').strip('[]').lstrip('0')+']'
+        item['Ideal SKU'] = \
+            '['+mfr+']['+item['Product ID'].replace(' ', '').replace('-', '').strip('[]').lstrip('0')+']'
         item['eBay Product SKU Number'] = ebay_product_number
         return item
-
 
     def get_ideal_dataseet(self):
         connection = pyodbc.connect("DSN=Ideal ODBC")
@@ -83,7 +89,7 @@ class database_connection():
             ideal_dataset[sku]['LOOKUPPARTNUMBER'] = row[3]
             ideal_dataset[sku]['ONHANDAVAILABLEQUANTITY'] = row[4]
             ideal_dataset[sku]['PARTNUMBER'] = row[0]
-        return (ideal_dataset)
+        return ideal_dataset
 
     def write_dict_to_csv(self, updated_products):
         ordered_dicts = [{'Item ID': product['Item ID'],

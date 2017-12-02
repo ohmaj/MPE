@@ -9,31 +9,33 @@ from Classes import Ideal_Scrape
 import sys
 import os
 
-class User_Interface:
+
+class UserInterface:
 
     def main_menu(self):
         self.cls()
-        print('Main Menu \n ------------ \n [1]Golden Eagle [2] Ariens [3] Kawasaki [4] AIP [5] CPD [6] Oscar Wilson [7] Ideal [8] Run All [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        print('Main Menu \n ------------ \n [1]Golden Eagle [2] Ariens [3] Kawasaki [4] AIP [5] CPD [6] Oscar Wilson '
+              '[7] Ideal [8] Run All [exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             self.golden_eagle_menu()
-        elif userSelection == '2':
+        elif user_selection == '2':
             self.ariens_menu()
-        elif userSelection == '3':
+        elif user_selection == '3':
             self.kawasaki_menu()
-        elif userSelection == '4':
+        elif user_selection == '4':
             self.aip_menu()
-        elif userSelection == '5':
+        elif user_selection == '5':
             self.cpd_menu()
-        elif userSelection == '6':
+        elif user_selection == '6':
             self.ow_menu()
-        elif userSelection == '7':
-            ideal = Ideal_Scrape.database_connection()
+        elif user_selection == '7':
+            ideal = Ideal_Scrape.DatabaseConnection()
             ideal.write_inventory()
-        elif userSelection == '8':
-            all = Run_All.Run_All()
-            all.run()
-        elif userSelection == 'exit':
+        elif user_selection == '8':
+            run_all = Run_All.RunAll()
+            run_all.run()
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -41,20 +43,20 @@ class User_Interface:
         self.main_menu()
 
     def run_all(self):
-        all = Run_All.Run_All()
-        all.run()
+        run_all = Run_All.RunAll()
+        run_all.run()
         self.main_menu()
 
     def aip_menu(self):
         self.cls()
         print('Main Menu \n ------------ \n [1] Quantity Scrape [back] Back to Main Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             aip = Distributor_AIP.AIP('AIP')
             aip.write_inventory()
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -64,15 +66,16 @@ class User_Interface:
 
     def cpd_menu(self):
         self.cls()
-        print('CPD Menu \n ------------ \n [1] XML Inquiry Quantity [2] Get XML Response Only [back] Back to Main Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        print('CPD Menu \n ------------ \n [1] XML Inquiry Quantity [2] Get XML Response Only '
+              '[back] Back to Main Menu [exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             self.cpd_xml_menu()
-        elif userSelection == '2':
+        elif user_selection == '2':
             self.cpd_xml_response()
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -82,20 +85,21 @@ class User_Interface:
 
     def ow_menu(self):
         self.cls()
-        print('Oscar Wilson Menu \n ------------ \n [1] MTD [2] Maruyama [3] AYP [back] Back to Main Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
-            mtd = From_File_OscarWilson.Update_Inventory('MTD')
+        print('Oscar Wilson Menu \n ------------ \n [1] MTD [2] Maruyama [3] AYP [back] Back to Main Menu '
+              '[exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
+            mtd = From_File_OscarWilson.UpdateInventory('MTD')
             mtd.write_inventory()
-        elif userSelection == '2':
-            mar = From_File_OscarWilson.Update_Inventory('MAR')
+        elif user_selection == '2':
+            mar = From_File_OscarWilson.UpdateInventory('MAR')
             mar.write_inventory()
-        elif userSelection == '3':
-            ayp = From_File_OscarWilson.Update_Inventory('AYP')
+        elif user_selection == '3':
+            ayp = From_File_OscarWilson.UpdateInventory('AYP')
             ayp.write_inventory()
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -106,13 +110,13 @@ class User_Interface:
     def kawasaki_menu(self):
         self.cls()
         print('CPD Scrape Menu \n ------------ \n [1] Scrape Kawasaki [back] Back to Main Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             kaw = Distributor_Kawasaki.Kawasaki('KAW')
             kaw.write_inventory()
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -123,13 +127,13 @@ class User_Interface:
     def ariens_menu(self):
         self.cls()
         print('CPD Scrape Menu \n ------------ \n [1] Scrape Ariens [back] Back to Main Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             ariens = Distributor_Ariens.Ariens('ARN')
             ariens.write_inventory()
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -139,22 +143,23 @@ class User_Interface:
 
     def golden_eagle_menu(self):
         self.cls()
-        print('CPD Scrape Menu \n ------------ \n [1] Scrape Echo [2] Scrape Billygoat [3] Scrape Both [back] Back to Main Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        print('CPD Scrape Menu \n ------------ \n [1] Scrape Echo [2] Scrape Billygoat [3] Scrape Both '
+              '[back] Back to Main Menu [exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
             ech.write_inventory()
-        elif userSelection == '2':
+        elif user_selection == '2':
             bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
             bil.write_inventory()
-        elif userSelection == '3':
+        elif user_selection == '3':
             ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
             bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
             ech.write_inventory()
             bil.write_inventory()
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -163,24 +168,25 @@ class User_Interface:
 
     def cpd_xml_response(self):
         self.cls()
-        print('CPD XML Response Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] AYP [6]All [back] Back to CPD Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        print('CPD XML Response Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] AYP [6]All '
+              '[back] Back to CPD Menu [exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             koh = XML_CPD.CPD('KOH')
             koh.get_xml_response()
-        elif userSelection == '2':
+        elif user_selection == '2':
             tec = XML_CPD.CPD('TEC')
             tec.get_xml_response()
-        elif userSelection == '3':
+        elif user_selection == '3':
             hyg = XML_CPD.CPD('HYD')
             hyg.get_xml_response()
-        elif userSelection == '4':
+        elif user_selection == '4':
             ic = XML_CPD.CPD('IC')
             ic.get_xml_response()
-        elif userSelection == '5':
+        elif user_selection == '5':
             ayp = XML_CPD.CPD('AYP')
             ayp.get_xml_response()
-        elif userSelection == '6':
+        elif user_selection == '6':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.get_xml_response()
@@ -206,9 +212,9 @@ class User_Interface:
                 ayp.get_xml_response()
             except:
                 pass
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.cpd_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -217,27 +223,28 @@ class User_Interface:
 
     def cpd_xml_menu(self):
         self.cls()
-        print('CPD XML Quantity Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] AYP [6] Martin Wheels [7] All [back] Back to CPD Menu [exit] Exit Program')
-        userSelection = input('What would you like to do?: ')
-        if userSelection == '1':
+        print('CPD XML Quantity Menu \n ------------ \n [1] Kohler [2] Tecumseh [3] Hydro Gear [4] Case [5] AYP '
+              '[6] Martin Wheels [7] All [back] Back to CPD Menu [exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
             koh = XML_CPD.CPD('KOH')
             koh.write_inventory()
-        elif userSelection == '2':
+        elif user_selection == '2':
             tec = XML_CPD.CPD('TEC')
             tec.write_inventory()
-        elif userSelection == '3':
+        elif user_selection == '3':
             hyg = XML_CPD.CPD('HYD')
             hyg.write_inventory()
-        elif userSelection == '4':
+        elif user_selection == '4':
             ic = XML_CPD.CPD('IC')
             ic.write_inventory()
-        elif userSelection == '5':
+        elif user_selection == '5':
             ayp = XML_CPD.CPD('AYP')
             ayp.write_inventory()
-        elif userSelection == '6':
+        elif user_selection == '6':
             mart = XML_CPD.CPD('MART')
             mart.write_inventory()
-        elif userSelection == '7':
+        elif user_selection == '7':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.write_inventory()
@@ -268,9 +275,9 @@ class User_Interface:
                 mart.write_inventory()
             except:
                 pass
-        elif userSelection == 'back':
+        elif user_selection == 'back':
             self.main_menu()
-        elif userSelection == 'exit':
+        elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
@@ -280,5 +287,6 @@ class User_Interface:
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
 
-program = User_Interface()
+
+program = UserInterface()
 program.main_menu()

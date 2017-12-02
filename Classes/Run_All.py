@@ -9,7 +9,8 @@ from Classes import Ideal_Scrape
 import time
 import os
 
-class Run_All:
+
+class RunAll:
 
     def run(self):
         self.cls()
@@ -32,29 +33,29 @@ class Run_All:
         arn.save_to_filepath = results_filepath
         aip = Distributor_AIP.AIP('AIP')
         aip.save_to_filepath = results_filepath
-        mtd = From_File_OscarWilson.Update_Inventory('MTD')
+        mtd = From_File_OscarWilson.UpdateInventory('MTD')
         mtd.save_to_filepath = results_filepath
-        mar = From_File_OscarWilson.Update_Inventory('MAR')
+        mar = From_File_OscarWilson.UpdateInventory('MAR')
         mar.save_to_filepath = results_filepath
         ste = From_File_Stens.Update_Inventory()
         ste.save_to_filepath = results_filepath
-        ideal = Ideal_Scrape.database_connection()
+        ideal = Ideal_Scrape.DatabaseConnection()
         ideal.save_to_filepath = results_filepath
         try:
             ech.write_inventory()
-            ech_success ='Echo Update Successful'
+            ech_success = 'Echo Update Successful'
         except:
-            ech_success ='Error Updating Echo'
+            ech_success = 'Error Updating Echo'
         try:
             bil.write_inventory()
-            bil_success ='Billy Goat Update Successful'
+            bil_success = 'Billy Goat Update Successful'
         except:
-            bil_success ='Error Updating BillyGoat'
+            bil_success = 'Error Updating BillyGoat'
         try:
             aip.write_inventory()
-            aip_success ='A&I Update Successful'
+            aip_success = 'A&I Update Successful'
         except:
-            aip_success ='Error Updating A&I'
+            aip_success = 'Error Updating A&I'
         try:
             mtd.write_inventory()
             mtd_success = 'MTD Update Successful'
@@ -77,24 +78,24 @@ class Run_All:
             ic_success = 'Error Updating Case'
         try:
             hyd.write_inventory()
-            hyd_success ='Hydro Gear Update Successful'
+            hyd_success = 'Hydro Gear Update Successful'
         except:
-            hyd_success ='Error Updating Hydro Gear'
+            hyd_success = 'Error Updating Hydro Gear'
         try:
             tec.write_inventory()
-            tec_success ='Tecumseh Update Successful'
+            tec_success = 'Tecumseh Update Successful'
         except:
-            tec_success ='Error Updating Tecumseh'
+            tec_success = 'Error Updating Tecumseh'
         try:
             koh.write_inventory()
-            koh_success ='Kohler Update Successful'
+            koh_success = 'Kohler Update Successful'
         except:
-            koh_success ='Error Updating Kohler'
+            koh_success = 'Error Updating Kohler'
         try:
             arn.write_inventory()
-            arn_success ='Ariens Update Successful'
+            arn_success = 'Ariens Update Successful'
         except:
-            arn_success ='Error Updating Ariens'
+            arn_success = 'Error Updating Ariens'
         try:
             kaw.write_inventory()
             kaw_success = 'Kawasaki Update Successful'
@@ -102,9 +103,9 @@ class Run_All:
             kaw_success = 'Error Updating Kawasaki'
         try:
             ideal.write_inventory()
-            ideal_success ='Self Update Successful'
+            ideal_success = 'Self Update Successful'
         except:
-            ideal_success ='Error Updating Self'
+            ideal_success = 'Error Updating Self'
         print_list = [mtd_success, mar_success,ste_success, ic_success, hyd_success, tec_success, koh_success, ech_success, bil_success, arn_success, aip_success, kaw_success, ideal_success]
         for item in print_list:
             print(item)

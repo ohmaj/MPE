@@ -4,7 +4,7 @@ import csv
 import requests
 from lxml import etree as element_tree
 from Models import Data_Models
-import codecs
+
 
 class CPD:
 
@@ -29,7 +29,7 @@ class CPD:
             try:
                 response = self.get_cpd_response(inquiry)
             except:
-                self.write_api_files(inquiry, response)
+                self.write_api_files(inquiry, response, i)
             try:
                 parsed_data_points = list(self.parse_xml_response_for_ebay_listing(response))
                 for point in parsed_data_points:
@@ -49,7 +49,7 @@ class CPD:
             try:
                 response = self.get_cpd_response(inquiry)
             except:
-                self.write_api_files(inquiry, response)
+                self.write_api_files(inquiry, response, i)
             try:
                 parsed_data_points = list(self.parse_xml_response_for_ebay_listing(response))
                 for point in parsed_data_points:
@@ -57,9 +57,9 @@ class CPD:
             except:
                 pass
             i += 1
-        return(parsed_data_set)
+        return parsed_data_set
 
-    def write_api_files(self, inquiry, response):
+    def write_api_files(self, inquiry, response, i):
         # ---------------- write inquiry to file for error checking--------------
         file_path = self.errors_filepath + self.mfr + '_Api_Inquiry' + str(i) + '.xml'
         temp_writer = open(file_path, 'w')
@@ -78,7 +78,7 @@ class CPD:
         for inquiry in xml_inquiries:
             print(self.mfr + ' Getting Response: ' + str(i) + ' of ' + str(count))
             response = self.get_cpd_response(inquiry)
-            file_path = self.errors_filepath + self.mfr + '_Api_Response' +str(i)+ '.xml'
+            file_path = self.errors_filepath + self.mfr + '_Api_Response' + str(i) + '.xml'
             temp_writer = open(file_path, 'w')
             temp_writer.write(response.text)
             temp_writer.close()
@@ -101,24 +101,25 @@ class CPD:
         data_set = list(self.product_data_set)
         count = 0
         data_set_count = len(data_set)
-        while count < (data_set_count):
+        while count < data_set_count:
             i = 0
             xml_request = self.xml_header
-            while i < self.inquiry_limit and count < (data_set_count):
-                xml_dataPoint = self.get_xml_datapoint(data_set[count])
-                xml_request = xml_request+xml_dataPoint
+            while i < self.inquiry_limit and count < data_set_count:
+                xml_data_point = self.get_xml_datapoint(data_set[count])
+                xml_request = xml_request+xml_data_point
                 i += 1
                 count += 1
                 self.cls()
-                print(self.mfr+' Making Inquiry: '+ str(int((count/data_set_count)*100))+'%')
+                print(self.mfr+' Making Inquiry: ' + str(int((count/data_set_count)*100))+'%')
             xml_request = xml_request+self.xml_footer
+            # noinspection PyUnusedLocal
             i = 0
             yield xml_request
 
     def get_cpd_response(self, xml_request):
         # headers = {'Content-Type': 'application/xml'}
-        response = requests.post(self.end_point_url, data = xml_request)
-        return (response)
+        response = requests.post(self.end_point_url, data=xml_request)
+        return response
 
     def parse_xml_response_for_ebay_listing(self, xml_file):
         parser = element_tree.XMLParser(recover=True)
@@ -126,25 +127,27 @@ class CPD:
         i = 1
         for part in tree:
             try:
-                itemID = self.none_clean(part.findall('CustomerInternalSKU')[0].text)
-                productID = self.none_clean(part.findall('PartNumberInquired')[0].text)
-                sku = '['+self.mfr+']['+productID+']'
+                item_id = self.none_clean(part.findall('CustomerInternalSKU')[0].text)
+                product_id = self.none_clean(part.findall('PartNumberInquired')[0].text)
+                sku = '[' + self.mfr + '][' + product_id + ']'
                 cost = self.none_clean(part.findall('UnitPrice')[0].text)
                 quantity = self.none_clean(part.findall('QuantityAvailable')[0].text)
-                supplierAccountNum = '22462'
-                supplierID = '8'
-                supplierName = 'Amanda  Fitzerold'
-                data_point = Data_Models.ResultsForEbay(['', itemID, '', sku, productID, '', quantity, cost, supplierID, supplierAccountNum, supplierName, '', 'Drop Shipper', '', '', 'Reconcileto', '', ''])
-                data_point.getFrameAsList()
+                supplier_account_num = '22462'
+                supplier_id = '8'
+                supplie_name = 'Amanda  Fitzerold'
+                data_point = Data_Models.ResultsForEbay(['', item_id, '', sku, product_id, '', quantity, cost,
+                                                         supplier_id, supplier_account_num, supplie_name, '',
+                                                         'Drop Shipper', '', '', 'Reconcileto', '', ''])
+                data_point.get_frame_as_list()
                 if data_point.frameAsList[5] == '':
                     data_point.frameAsList[5] = 'error'
                 yield data_point
             except Exception as inst:
                 data_point = Data_Models.ResultsForEbay(
-                    ['', '', '', '', '', 'Error', '', '', '', '', '', '', '', '', '', '',inst.__str__()])
-                data_point.getFrameAsList()
+                    ['', '', '', '', '', 'Error', '', '', '', '', '', '', '', '', '', '', inst.__str__()])
+                data_point.get_frame_as_list()
                 yield (data_point)
-            i +=1
+            i += 1
 
     def parse_xml_response_for_new_listing(self, xml_file):
         parser = element_tree.XMLParser(recover=True)
@@ -154,26 +157,31 @@ class CPD:
             try:
                 title = self.none_clean((part.findall('PartDescription'))[0].text)
                 msrp = self.none_clean(part.findall('RetailPrice')[0].text)
-                productID = self.none_clean(part.findall('PartNumberInquired')[0].text)
-                sku = '['+self.mfr+']['+productID+']'
+                product_id = self.none_clean(part.findall('PartNumberInquired')[0].text)
+                sku = '['+self.mfr+']['+product_id+']'
                 cost = self.none_clean(part.findall('UnitPrice')[0].text)
                 quantity = self.none_clean(part.findall('QuantityAvailable')[0].text)
-                supplierAccountNum = '22462'
-                supplierID = '8'
-                supplierName = 'Amanda  Fitzerold'
-                data_point = Data_Models.ResultsForEbay(['', '', sku, productID, '', quantity, cost, supplierID, supplierAccountNum, supplierName, '', '', '', '', 'Reconcileto', title, msrp])
-                data_point.getFrameAsList_new_listing()
+                supplier_account_num = '22462'
+                supplier_id = '8'
+                supplier_name = 'Amanda  Fitzerold'
+                data_point = Data_Models.ResultsForEbay(['', '', sku, product_id, '', quantity, cost, supplier_id,
+                                                         supplier_account_num, supplier_name, '', '', '', '',
+                                                         'Reconcileto', title, msrp])
+                data_point.get_frame_as_list_new_listing()
                 yield (data_point)
             except:
                 pass
-            i +=1
+            i += 1
 
     def get_xml_datapoint(self, data_point):
         mfr = self.mfr
         if mfr == 'MART':
             mfr = 'MAR'
-        smart_order = ('<SmartOrder><CustomerNumber>'+data_point['Supplier ID']+'</CustomerNumber><ManufacturerCode>'+mfr+'</ManufacturerCode><PartNumber>'+data_point['Product ID']+'</PartNumber><Quantity>10</Quantity><ClientNoSupNLA/><UPCCode/><InquirySequenceNumber/><CustomerInternalSKU>'+data_point['Item ID']+'</CustomerInternalSKU></SmartOrder>')
-        return(smart_order)
+        smart_order = ('<SmartOrder><CustomerNumber>'+data_point['Supplier ID']+'</CustomerNumber><ManufacturerCode>' +
+                       mfr + '</ManufacturerCode><PartNumber>'+data_point['Product ID'] +
+                       '</PartNumber><Quantity>10</Quantity><ClientNoSupNLA/><UPCCode/><InquirySequenceNumber/>'
+                       '<CustomerInternalSKU>' + data_point['Item ID'] + '</CustomerInternalSKU></SmartOrder>')
+        return smart_order
 
     def write_data_set_to_csv(self, data_set):
         ordered_dicts = [{'Item ID': product.frameAsList[0],
@@ -204,8 +212,8 @@ class CPD:
             for row in reader:
                 yield (row)
 
-    def none_clean(self, input):
-        return(str(input).replace('None', ''))
+    def none_clean(self, input_string):
+        return str(input_string).replace('None', '')
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
