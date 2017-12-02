@@ -2,13 +2,15 @@ from Models import Listing_Model
 from Classes import Parts_Tree_Scraper
 import csv, time, os
 
-class ebay:
+
+class Ebay:
 
     def __init__(self):
         self.mfr_code = 'TEC'
         self.mfr_name = 'Tecumseh'
-        self.product_ids_filepath = r'T:/ebay/'+ self.mfr_code +'/Data/New_Listings/ProductIds.csv'
-        self.save_to_filepath = r'T:/ebay/' + self.mfr_code + '/Data/New_Listings/Generated_Listings' + time.strftime("%m%Y") + '.csv'
+        self.product_ids_filepath = r'T:/ebay/' + self.mfr_code + '/Data/New_Listings/ProductIds.csv'
+        self.save_to_filepath = r'T:/ebay/' + self.mfr_code + '/Data/New_Listings/Generated_Listings' \
+                                + time.strftime("%m%Y") + '.csv'
 
     def write_listing(self):
         products = list(self.get_new_products())
@@ -47,7 +49,7 @@ class ebay:
     def get_listing_model(self, products):
         print('Creating Listings...')
         for product in products:
-            listing = Listing_Model.Create_Ebay_Listing()
+            listing = Listing_Model.CreateEbayListing()
             listing.product_id = product['Product ID']
             listing.product_mfr = self.mfr_code
             listing.product_brand = self.mfr_name

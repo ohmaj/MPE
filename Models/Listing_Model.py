@@ -1,6 +1,6 @@
 
 
-class Create_Ebay_Listing:
+class CreateEbayListing:
 
     def __init__(self):
         self.sku = ''
@@ -45,40 +45,42 @@ class Create_Ebay_Listing:
 
     def set_where_used_html(self):
         if self.where_used == '':
-            self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">Commonly Used on Models:<br /><br /> More Information Coming Soon' + self.where_used
+            self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">Commonly Used on Models:<br />' \
+                                    '<br /> More Information Coming Soon' + self.where_used
         else:
-            self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">Commonly Used on Models:<br /><br />' + self.where_used
+            self.ebay_description = '<span style="font-size: 16pt; color: #ef0f0f">' \
+                                    'Commonly Used on Models:<br /><br />' + self.where_used
 
     def get_part_as_dict(self):
-        part = {}
-        part['SKU'] = self.sku
-        part['Product ID'] = self.product_id
-        part['Product ID Type'] = self.product_id_type
-        part['Product Brand'] = self.product_brand
-        part['Title'] = self.title
-        part['Weight Price File'] = self.weight_pricefile
-        part['Weight Major'] = self.weight_major
-        part['Weight Minor'] = self.weight_minor
-        part['Cost'] = self.cost
-        part['Fees'] = self.fees
-        part['Profit'] = self.profit
-        part['Fixed Price'] = self.fixed_price
-        part['MSRP'] = self.msrp
-        part['eBay Lot Size'] = self.lot_size
-        part['eBay Category1ID'] = self.ebay_category1_id
-        part['Primary Fulfillment Soruce'] = self.primary_fullfillment
-        part['Secondary Fulfillment Source'] = self.secondary_fullfillment
-        part['IS_Brand'] = self.is_brand
-        part['IS_MPN'] = self.is_mpn
-        part['IS Taxable'] = self.is_taxable
-        part['IS_Item Condition'] = self.is_item_condition
-        part['eBay Payment Preset Name'] = self.ebay_payment_preset_name
-        part['eBay Preset Wrapper Name'] = self.ebay_preset_wrapper_name
-        part['eBay Description Wrapper Name'] = self.ebay_description_wrapper_name
-        part['ebay Shipping Preset Name'] = self.ebay_shipping_preset_name
-        part['Picture'] = self.picture_url
-        part['Pictures Manual Picture URL'] = self.picture_url
-        part['eBay Description'] = self.ebay_description
+        part = {'SKU': self.sku,
+                'Product ID': self.product_id,
+                'Product ID Type': self.product_id_type,
+                'Product Brand': self.product_brand,
+                'Title': self.title,
+                'Weight Price File': self.weight_pricefile,
+                'Weight Major': self.weight_major,
+                'Weight Minor': self.weight_minor,
+                'Cost': self.cost,
+                'Fees': self.fees,
+                'Profit': self.profit,
+                'Fixed Price': self.fixed_price,
+                'MSRP': self.msrp,
+                'eBay Lot Size': self.lot_size,
+                'eBay Category1ID': self.ebay_category1_id,
+                'Primary Fulfillment Soruce': self.primary_fullfillment,
+                'Secondary Fulfillment Source': self.secondary_fullfillment,
+                'IS_Brand': self.is_brand,
+                'IS_MPN': self.is_mpn,
+                'IS Taxable': self.is_taxable,
+                'IS_Item Condition': self.is_item_condition,
+                'eBay Payment Preset Name': self.ebay_payment_preset_name,
+                'eBay Preset Wrapper Name': self.ebay_preset_wrapper_name,
+                'eBay Description Wrapper Name': self.ebay_description_wrapper_name,
+                'ebay Shipping Preset Name': self.ebay_shipping_preset_name,
+                'Picture': self.picture_url,
+                'Pictures Manual Picture URL': self.picture_url,
+                'eBay Description': self.ebay_description}
+
         return part
 
     def set_all(self):
