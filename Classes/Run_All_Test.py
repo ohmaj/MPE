@@ -115,20 +115,20 @@ class RunAll:
         input('Press Enter To Finish')
 
     def write_dict_to_csv(self, updated_products):
-        ordered_dicts = [{'Item ID' : product['Item ID'],
-                          'External Item ID':product['External Item ID'],
-                          'SKU' : product['SKU'],
-                          'Product ID' : product['Product ID'],
-                          'Storage Location' : product['Storage Location'],
-                          'Quantity' : product['Quantity'],
-                          'Cost' : product['Cost'],
-                          'Supplier ID' : product['Supplier ID'],
-                          'Supplier Account Num' : product['Supplier Account Num'],
-                          'Supplier Name' : product['Supplier Name'],
-                          'Date Purchased' : product['Date Purchased'],
+        ordered_dicts = [{'Item ID': product['Item ID'],
+                          'External Item ID': product['External Item ID'],
+                          'SKU': product['SKU'],
+                          'Product ID': product['Product ID'],
+                          'Storage Location': product['Storage Location'],
+                          'Quantity': product['Quantity'],
+                          'Cost': product['Cost'],
+                          'Supplier ID': product['Supplier ID'],
+                          'Supplier Account Num': product['Supplier Account Num'],
+                          'Supplier Name': product['Supplier Name'],
+                          'Date Purchased': product['Date Purchased'],
                           'Fulfillment Source': 'Drop Shipper',
-                          'PO Number' : product['PO Number'],
-                          'Invoice Number' : product['Invoice Number'],
+                          'PO Number': product['PO Number'],
+                          'Invoice Number': product['Invoice Number'],
                           'Action': 'Reconcileto'
                           } for product in updated_products]
         print('Writing File....')
@@ -142,7 +142,3 @@ class RunAll:
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
-
-
-run_all = RunAll()
-run_all.run()

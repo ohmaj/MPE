@@ -39,7 +39,7 @@ class CreateEbayListing:
         self.title = 'Genuine ' + self.product_brand+' Part ' + self.raw_title + ' ' + self.sku
 
     def set_sku(self):
-        self.sku = '[' + self.product_mfr + '][' + self.product_id + ']'
+        self.sku = '[' + self.product_mfr + '][' + self.product_id.strip('[]') + ']'
         self.is_mpn = self.sku
         self.is_model = self.sku
 

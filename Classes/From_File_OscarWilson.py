@@ -53,9 +53,12 @@ class UpdateInventory:
                 del row['Title']
                 row['Fulfillment Source'] = 'Drop Shipper'
                 row['Action'] = 'Reconcileto'
-                row['TEMPSKU'] = '[' + self.mfr + '][' + row['Product ID'] + ']'
-                if self.mfr == 'AYP':
-                    row['TEMPSKU'] = '[HOP][' + row['Product ID'] + ']'
+                if self.mfr == 'MTD':
+                    row['TEMPSKU'] = '[' + self.mfr + ']' + row['Product ID']
+                elif self.mfr == 'AYP':
+                        row['TEMPSKU'] = '[HOP][' + row['Product ID'] + ']'
+                else:
+                    row['TEMPSKU'] = '[' + self.mfr + '][' + row['Product ID'] + ']'
                 running_dict[row['TEMPSKU']] = row
         return running_dict
 

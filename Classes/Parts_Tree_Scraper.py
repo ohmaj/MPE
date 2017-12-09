@@ -53,7 +53,7 @@ class PartsTreeScraper:
             yield parts_tree_part
 
     def construct_url(self, mfr, part_id):
-        return 'http://www.partstree.com/parts/' + mfr + '/parts/' + part_id + '/'
+        return 'http://www.partstree.com/parts/' + mfr + '/parts/' + part_id.lower() + '/'
 
     def scrape_part(self, url):
         page = requests.get(url)
@@ -68,11 +68,11 @@ class PartsTreeScraper:
             parts_tree_part.part_description = tree.xpath('/html/body/div[2]/div[2]/div[5]/div/div[2]/p[3]/text()')[0]
         except:
             pass
-        try:
-            compatable_machines = tree.xpath('/html/body/div[2]/div[2]/div[6]/ul/li/a/text()')
-            parts_tree_part.compatable_machines = '<br>'.join(compatable_machines)
-        except:
-            pass
+        # try:
+        compatable_machines = tree.xpath('/html/body/div[2]/div[2]/div[6]/ul/li/a/text()')
+        parts_tree_part.compatable_machines = '<br>'.join(compatable_machines)
+        # except:
+        #     pass
         try:
             parts_tree_part.part_thumbnail_src = \
                 tree.xpath('/html/body/div[2]/div[2]/div[4]/div[2]/div[1]/a/img/@src')[0]
