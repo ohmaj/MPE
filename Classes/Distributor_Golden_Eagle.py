@@ -1,5 +1,8 @@
 from Classes import Distributor
 from lxml import html
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class Golden_Eagle(Distributor.ScrapeDistributor):
@@ -16,6 +19,7 @@ class Golden_Eagle(Distributor.ScrapeDistributor):
         login_button_name = 'ACTION_SIGNON'
         login_button_xpath = '//*[@id="layout-middle"]/div/div[1]/div[1]/ul/li[1]/a'
         browser.get(self.login_url)
+        myElem = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.XPATH, login_button_xpath)))
         browser.find_element_by_xpath(login_button_xpath).click()
         browser.find_element_by_name(username_name).clear()
         browser.find_element_by_name(username_name).send_keys(self.username)
@@ -23,6 +27,8 @@ class Golden_Eagle(Distributor.ScrapeDistributor):
         browser.find_element_by_name(login_button_name).click()
 
     def load_product(self, product_id, browser):
+        if browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a/text()') == 'Sign on':
+            self.login()
         productSearchUrl = self.product_search_url
         browser.get(productSearchUrl+self.manufacturer+'++'+product_id)
 

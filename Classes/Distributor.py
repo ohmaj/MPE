@@ -18,7 +18,7 @@ class ScrapeDistributor(object):
     def write_inventory(self):
         self.set_credentials()
         global browser
-        browser = webdriver.Chrome()
+        browser = webdriver.Firefox()
         self.login(browser)
         # get data set
         products = list(self.get_product_list())
@@ -33,7 +33,7 @@ class ScrapeDistributor(object):
     def get_inventory(self):
         self.set_credentials()
         global browser
-        browser = webdriver.Chrome()
+        browser = webdriver.Firefox()
         self.login(browser)
         # get data set
         products = list(self.get_product_list())
@@ -53,7 +53,7 @@ class ScrapeDistributor(object):
             self.username = credentials.username
             self.password = credentials.password
         except:
-            pass
+            print("error getting Credentials")
 
     def login(self, browser):
         pass
@@ -72,9 +72,9 @@ class ScrapeDistributor(object):
         count = 1
         total = len(products)
         for item in products:
-            if count % 100 == 0:
+            if count % 500 == 0:
                 browser.quit()
-                browser = webdriver.Chrome()
+                browser = webdriver.Firefox()
                 self.login(browser)
             try:
                 # goto part page
@@ -87,7 +87,6 @@ class ScrapeDistributor(object):
                 self.cls()
                 print('Scrape Progress: ' + str(int((count / total) * 100)) + '%')
                 count += 1
-
                 yield(updated_part)
             except Exception as inst:
                 item['Quantity'] = 'Error'
@@ -96,7 +95,7 @@ class ScrapeDistributor(object):
                     browser.close()
                 except:
                     pass
-                browser = webdriver.Chrome()
+                browser = webdriver.Firefox()
                 self.login(browser)
                 yield (item)
 

@@ -1,5 +1,8 @@
-from Classes import Distributor
 from lxml import html
+from Classes import Distributor
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class AIP(Distributor.ScrapeDistributor):
@@ -26,6 +29,7 @@ class AIP(Distributor.ScrapeDistributor):
         check_button_xpath = r'/html/body/form/table/tbody/tr/td[1]/table/tbody/tr[2]/td[3]/input[2]'
         frame = browser.find_element_by_xpath(frame_xpath)
         browser.switch_to.frame(frame)
+        myElem = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.XPATH, item_number_input_xpath)))
         browser.find_element_by_xpath(item_number_input_xpath).clear()
         browser.find_element_by_xpath(item_number_input_xpath).send_keys(product_id.strip('[]'))
         browser.find_element_by_xpath(qty_input_xpath).clear()
