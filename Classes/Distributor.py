@@ -14,33 +14,30 @@ class ScrapeDistributor(object):
         self.product_source_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/ProductIds.csv'
         self.save_to_filepath = r'T:/ebay/' + self.manufacturer + '/inventory/' + self.manufacturer + 'Scrape' + \
                                 time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
+        self.browser = webdriver.Firefox()
 
     def write_inventory(self):
         self.set_credentials()
-        global browser
-        browser = webdriver.Firefox()
-        self.login(browser)
+        self.login(self.browser)
         # get data set
         products = list(self.get_product_list())
         # iterate through data set
-        updated_products = list(self.get_distributor_inventory(products, browser))
+        updated_products = list(self.get_distributor_inventory(products, self.browser))
         self.write_dict_to_csv(updated_products)
         try:
-            browser.close()
+            self.browser.quit()
         except:
             pass
 
     def get_inventory(self):
         self.set_credentials()
-        global browser
-        browser = webdriver.Firefox()
-        self.login(browser)
+        self.login(self.browser)
         # get data set
         products = list(self.get_product_list())
         # iterate through data set
         updated_products = list(self.get_distributor_inventory(products, browser))
         try:
-            browser.close()
+            self.browser.close()
         except:
             pass
         return updated_products
@@ -92,11 +89,14 @@ class ScrapeDistributor(object):
                 item['Quantity'] = 'Error'
                 item['Error'] = inst.__str__()
                 try:
-                    browser.close()
+                    self.login(browser)
                 except:
-                    pass
-                browser = webdriver.Firefox()
-                self.login(browser)
+                    try:
+                        browser.close()
+                    except:
+                        pass
+                    browser = webdriver.Firefox()
+                    self.login(browser)
                 yield (item)
 
     def load_product(self, product_id, browser):
