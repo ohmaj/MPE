@@ -14,7 +14,7 @@ class RunAll:
 
     def run(self):
         self.cls()
-        results_filepath = r'T:/ebay/All/inventory/All_new_' + time.strftime('%m%d%Y' + '_' + '%I%M') + '.csv'
+        results_filepath = r'T:/ebay/All/inventory/All_new_' + time.strftime('%m%d%Y' + '_' + '%I%M') + 'self.csv'
         try:
             mtd = From_File_OscarWilson.UpdateInventory('MTD')
             mtd.save_to_filepath = results_filepath
