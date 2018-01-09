@@ -1,6 +1,7 @@
 from Classes import Distributor
 from lxml import html
 import re
+from selenium.webdriver.support.ui import Select
 
 
 class Ariens(Distributor.ScrapeDistributor):
@@ -35,6 +36,18 @@ class Ariens(Distributor.ScrapeDistributor):
         browser.find_element_by_xpath(partNumberXPath).send_keys(product_id.strip("[]"))
         browser.find_element_by_xpath(qtyXPath).send_keys('10')
         browser.find_element_by_xpath(submitButtonXPath).click()
+        try:
+            browser.find_element_by_xpath('/html/body/table[2]/tbody/tr[2]/td[4]/text()')
+        except:
+            browser.get(productSearchUrl)
+            frame = browser.find_element_by_xpath(frameXPath)
+            browser.switch_to.frame(frame)
+            browser.find_element_by_xpath(partNumberXPath).send_keys(product_id.strip("[]"))
+            browser.find_element_by_xpath(qtyXPath).send_keys('10')
+            select = Select(browser.find_element_by_name('partid'))
+            select.select_by_visible_text('Gravely')
+            browser.find_element_by_xpath(submitButtonXPath).click()
+
 
     def parse_scrape(self, item, html_scrape):
         tree = html.fromstring(html_scrape)
