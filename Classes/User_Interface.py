@@ -5,6 +5,8 @@ from Classes import Distributor_AIP
 from Classes import XML_CPD
 from Classes import From_File_OscarWilson
 from Classes import Run_All
+from Classes import Run_All_web
+from Classes import Run_All_Not_Web
 from Classes import Ideal_Scrape
 import sys
 import os
@@ -43,9 +45,26 @@ class UserInterface:
         self.main_menu()
 
     def run_all(self):
-        run_all = Run_All.RunAll()
-        run_all.run()
-        self.main_menu()
+        print('Main Menu \n ------------ \n [1] All Web Scrapes [2] Non-Scrape All [3] All All [back] Back to Main Menu'
+              ' [exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
+            run_all = Run_All_web.RunAll()
+            run_all.run()
+        elif user_selection == '2':
+            run_all = Run_All_Not_Web.RunAll()
+            run_all.run()
+        elif user_selection == '3':
+            run_all = Run_All.RunAll()
+            run_all.run()
+        elif user_selection == 'back':
+            self.main_menu()
+        elif user_selection == 'exit':
+            sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.cpd_menu()
+        self.run_all()
 
     def aip_menu(self):
         self.cls()
