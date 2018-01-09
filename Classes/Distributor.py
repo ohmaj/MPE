@@ -70,9 +70,9 @@ class ScrapeDistributor(object):
         total = len(products)
         for item in products:
             if count % 500 == 0:
-                browser.quit()
-                browser = webdriver.Firefox()
-                self.login(browser)
+                self.browser.quit()
+                self.browser = webdriver.Firefox()
+                self.login(self.browser)
             try:
                 # goto part page
                 self.load_product(item['Product ID'], browser)
