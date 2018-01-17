@@ -13,7 +13,8 @@ class DatabaseConnection:
                                       r'T:/ebay/HYD/inventory/ProductIds.csv', r'T:/ebay/KOH/inventory/ProductIds.csv',
                                       r'T:/ebay/MTD/inventory/ProductIds.csv', r'T:/ebay/AIP/inventory/ProductIds.csv',
                                       r'T:/ebay/STE/inventory/ProductIds.csv', r'T:/ebay/MART/inventory/ProductIds.csv',
-                                      r'T:/ebay/AYP/inventory/ProductIds.csv', r'T:/ebay/FEL/inventory/ProductIds.csv']
+                                      r'T:/ebay/AYP/inventory/ProductIds.csv', r'T:/ebay/FEL/inventory/ProductIds.csv',
+                                      r'T:/ebay/MAR/inventory/ProductIds.csv']
         self.save_to_filepath = r'T:/ebay/All/inventory/' + 'Self_Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") \
                                 + '.csv'
 
