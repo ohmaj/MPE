@@ -34,6 +34,8 @@ class CreateEbayListing:
         self.ebay_shipping_preset_name = ''
         self.picture_url = ''
         self.ebay_description = ''
+        self.ebay_store_category = ''
+        self.allocation_plan = ''
 
     def set_title(self):
         self.title = 'Genuine ' + self.product_brand+' Part ' + self.raw_title + ' ' + self.sku
@@ -79,7 +81,9 @@ class CreateEbayListing:
                 'ebay Shipping Preset Name': self.ebay_shipping_preset_name,
                 'Picture': self.picture_url,
                 'Pictures Manual Picture URL': self.picture_url,
-                'eBay Description': self.ebay_description}
+                'eBay Description': self.ebay_description,
+                'eBay Store Category': self.ebay_store_category,
+                'Allocation Plan': self.allocation_plan}
 
         return part
 
