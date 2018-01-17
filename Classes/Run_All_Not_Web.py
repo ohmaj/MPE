@@ -1,7 +1,3 @@
-from Classes import Distributor_Kawasaki
-from Classes import Distributor_Golden_Eagle
-from Classes import Distributor_Ariens
-from Classes import Distributor_AIP
 from Classes import From_File_OscarWilson
 from Classes import From_File_Stens
 from Classes import XML_CPD
@@ -65,6 +61,13 @@ class RunAll:
         except:
             koh_success = 'Error Updating Kohler'
         try:
+            ayp = XML_CPD.CPD('AYP')
+            ayp.save_to_filepath = results_filepath
+            ayp.write_inventory()
+            ayp_success = 'AYP Update Successful'
+        except:
+            ayp_success = 'Error Updating Kohler'
+        try:
             ideal = Ideal_Scrape.DatabaseConnection()
             ideal.save_to_filepath = results_filepath
             ideal.write_inventory()
@@ -73,7 +76,7 @@ class RunAll:
             ideal_success = 'Error Updating Self'
         print(ideal_success)
         print_list = [mtd_success, mar_success,ste_success, ic_success, hyd_success, tec_success, koh_success,
-                      ideal_success]
+                      ayp_success, ideal_success]
         for item in print_list:
             print(item)
         input('Press Enter To Finish')

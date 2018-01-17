@@ -22,7 +22,7 @@ class ScrapeDistributor(object):
         # get data set
         products = list(self.get_product_list())
         # iterate through data set
-        updated_products = list(self.get_distributor_inventory(products, self.browser))
+        updated_products = list(self.get_distributor_inventory(products))
         self.write_dict_to_csv(updated_products)
         try:
             self.browser.quit()
@@ -35,7 +35,7 @@ class ScrapeDistributor(object):
         # get data set
         products = list(self.get_product_list())
         # iterate through data set
-        updated_products = list(self.get_distributor_inventory(products, browser))
+        updated_products = list(self.get_distributor_inventory(products))
         try:
             self.browser.close()
         except:
@@ -65,19 +65,19 @@ class ScrapeDistributor(object):
                 row['Error'] = ''
                 yield (row)
 
-    def get_distributor_inventory(self, products, browser):
+    def get_distributor_inventory(self, products):
         count = 1
         total = len(products)
         for item in products:
-            if count % 500 == 0:
+            if count % 600 == 0:
                 self.browser.quit()
                 self.browser = webdriver.Firefox()
                 self.login(self.browser)
             try:
                 # goto part page
-                self.load_product(item['Product ID'], browser)
+                self.load_product(item['Product ID'], self.browser)
                 # scrape part page
-                scrape = self.scrape_page(browser)
+                scrape = self.scrape_page(self.browser)
                 # parse scrape
                 updated_part = self.parse_scrape(item, scrape)
                 # return parse
@@ -89,14 +89,14 @@ class ScrapeDistributor(object):
                 item['Quantity'] = 'Error'
                 item['Error'] = inst.__str__()
                 try:
-                    self.login(browser)
+                    self.login(self.browser)
                 except:
                     try:
-                        browser.close()
+                        self.browser.close()
                     except:
                         pass
-                    browser = webdriver.Firefox()
-                    self.login(browser)
+                    self.browser = webdriver.Firefox()
+                    self.login(self.browser)
                 yield (item)
 
     def load_product(self, product_id, browser):

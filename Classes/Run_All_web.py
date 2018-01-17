@@ -8,53 +8,39 @@ from Classes import XML_CPD
 from Classes import Ideal_Scrape
 import time
 import os
-
+import threading
 
 class RunAll:
+    results_filepath = r'T:/ebay/All/inventory/All_new_' + time.strftime('%m%d%Y' + '_' + '%I%M') + 'web.csv'
 
     def run(self):
         self.cls()
-        results_filepath = r'T:/ebay/All/inventory/All_new_' + time.strftime('%m%d%Y' + '_' + '%I%M') + 'web.csv'
+        kaw = Distributor_Kawasaki.Kawasaki('KAW')
+        kaw.save_to_filepath = self.results_filepath
+        arn = Distributor_Ariens.Ariens('ARN')
+        arn.save_to_filepath = self.results_filepath
+        aip = Distributor_AIP.AIP('AIP')
+        aip.save_to_filepath = self.results_filepath
+        th1 = threading.Thread(target=self.golden_eagle)
+        th2 = threading.Thread(target=kaw.write_inventory)
+        th3 = threading.Thread(target=aip.write_inventory)
+        th4 = threading.Thread(target=arn.write_inventory)
 
-        try:
-            aip = Distributor_AIP.AIP('AIP')
-            aip.save_to_filepath = results_filepath
-            aip.write_inventory()
-            aip_success = 'A&I Update Successful'
-        except:
-            aip_success = 'Error Updating A&I'
-        try:
-            arn = Distributor_Ariens.Ariens('ARN')
-            arn.save_to_filepath = results_filepath
-            arn.write_inventory()
-            arn_success = 'Ariens Update Successful'
-        except:
-            arn_success = 'Error Updating Ariens'
-        try:
-            ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
-            ech.save_to_filepath = results_filepath
-            ech.write_inventory()
-            ech_success = 'Echo Update Successful'
-        except:
-            ech_success = 'Error Updating Echo'
-        try:
-            bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
-            bil.save_to_filepath = results_filepath
-            bil.write_inventory()
-            bil_success = 'Billy Goat Update Successful'
-        except:
-            bil_success = 'Error Updating BillyGoat'
-        try:
-            kaw = Distributor_Kawasaki.Kawasaki('KAW')
-            kaw.save_to_filepath = results_filepath
-            kaw.write_inventory()
-            kaw_success = 'Kawasaki Update Successful'
-        except:
-            kaw_success = 'Error Updating Kawasaki'
-        print_list = [ech_success, bil_success, arn_success, aip_success, kaw_success]
-        for item in print_list:
-            print(item)
+        th1.start()
+        th2.start()
+        th3.start()
+        th4.start()
+
+
         input('Press Enter To Finish')
+
+    def golden_eagle(self):
+        bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
+        bil.save_to_filepath = self.results_filepath
+        bil.write_inventory()
+        ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
+        ech.save_to_filepath = self.results_filepath
+        ech.write_inventory()
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')

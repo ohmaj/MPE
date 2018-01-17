@@ -8,10 +8,10 @@ import os
 class Ebay:
 
     def __init__(self):
-        self.mfr_code = 'TEC'
-        self.mfr_name = 'Tecumseh'
-        self.product_ids_filepath = r'T:/ebay/' + self.mfr_code + '/Data/New_Listings/ProductIds.csv'
-        self.save_to_filepath = r'T:/ebay/' + self.mfr_code + '/Data/New_Listings/Generated_Listings' \
+        self.mfr_code = 'KOH'
+        self.mfr_name = 'kohler-engines'
+        self.product_ids_filepath = r'T:/ebay/' + self.mfr_code + '/Data/2018/ProductIds.csv'
+        self.save_to_filepath = r'T:/ebay/' + self.mfr_code + '/Data/2018/Generated_Listings' \
                                 + time.strftime("%m%Y") + '.csv'
 
     def write_listing(self):
