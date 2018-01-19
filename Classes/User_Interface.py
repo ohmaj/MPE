@@ -7,6 +7,7 @@ from Classes import From_File_OscarWilson
 from Classes import Run_All_web
 from Classes import Run_All_Not_Web
 from Classes import Ideal_Scrape
+from Classes import From_File_Golden_Eagle
 import sys
 import os
 
@@ -15,7 +16,7 @@ class UserInterface:
 
     def main_menu(self):
         self.cls()
-        print('Main Menu \n ------------ \n[1]Golden Eagle \n[2] Ariens \n[3] Kawasaki \n[4] AIP \n[5] CPD \n'
+        print('Main Menu \n ------------ \n[1] Golden Eagle \n[2] Ariens \n[3] Kawasaki \n[4] AIP \n[5] CPD \n'
               '[6] Oscar Wilson \n[7] Ideal \n[8] Run All \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
@@ -43,7 +44,7 @@ class UserInterface:
         self.main_menu()
 
     def run_all(self):
-        print('Main Menu \n ------------ \n[1] All Web Scrapes \n[2] Non-Scrape All \n[3] All All '
+        print('Run All Menu \n ------------ \n[1] All Web Scrapes \n[2] All Other \n[3] All The All'
               '\n[back] Back to Main Menu \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
@@ -68,7 +69,8 @@ class UserInterface:
 
     def aip_menu(self):
         self.cls()
-        print('Main Menu \n ------------ \n[1] Quantity Scrape \n[back] Back to Main Menu \n[exit] Exit Program\n')
+        print('A&I Products Menu \n ------------ \n[1] Quantity Scrape '
+              '\n[back] Back to Main Menu \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             aip = Distributor_AIP.AIP('AIP')
@@ -128,7 +130,8 @@ class UserInterface:
 
     def kawasaki_menu(self):
         self.cls()
-        print('CPD Scrape Menu \n ------------ \n[1] Scrape Kawasaki \n[back] Back to Main Menu \n[exit] Exit Program\n')
+        print('Kawasaki Menu \n ------------ \n[1] Scrape Kawasaki \n[back] Back to Main Menu \n'
+              '[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             kaw = Distributor_Kawasaki.Kawasaki('KAW')
@@ -145,7 +148,7 @@ class UserInterface:
 
     def ariens_menu(self):
         self.cls()
-        print('CPD Scrape Menu \n ------------ \n[1] Scrape Ariens \n[back] Back to Main Menu \n[exit] Exit Program\n')
+        print('Ariens Menu \n ------------ \n[1] Scrape Ariens \n[back] Back to Main Menu \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             ariens = Distributor_Ariens.Ariens('ARN')
@@ -162,8 +165,26 @@ class UserInterface:
 
     def golden_eagle_menu(self):
         self.cls()
-        print('CPD Scrape Menu \n ------------ \n[1] Scrape Echo \n[2] Scrape Billygoat \n[3] Scrape Both '
-              '[back] Back to Main Menu [exit] Exit Program\n')
+        print('Golden Eagle Menu \n ------------ \n[1] Golden Eagle Scrape \n[2] Godlen Eagle From File'
+              '\n[back] Back to Main Menu \n[exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
+            self.golden_eagle_scrape_menu()
+        elif user_selection == '2':
+            self.golden_eagle_from_file_menu()
+        elif user_selection == 'back':
+            self.main_menu()
+        elif user_selection == 'exit':
+            sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.golden_eagle_menu()
+        self.golden_eagle_menu()
+
+    def golden_eagle_scrape_menu(self):
+        self.cls()
+        print('Golden Eagle Scrape Menu \n ------------ \n[1] Echo \n[2] Billygoat \n[3] Both '
+              '\n[back] Back to Previous Menu \n[exit] Exit Program')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
@@ -177,18 +198,43 @@ class UserInterface:
             ech.write_inventory()
             bil.write_inventory()
         elif user_selection == 'back':
-            self.main_menu()
+            self.golden_eagle_menu()
         elif user_selection == 'exit':
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
+            self.golden_eagle_scrape_menu()
+        self.golden_eagle_scrape_menu()
+
+    def golden_eagle_from_file_menu(self):
+        self.cls()
+        print('Golden Eagle From File Menu \n ------------ \n[1] Echo\n[2] Billygoat \n[3] Both '
+              '\n[back] Back to Previous Menu \n[exit] Exit Program')
+        user_selection = input('What would you like to do?: ')
+        if user_selection == '1':
+            ech = From_File_Golden_Eagle.GoldenEagleFromFile('ECH')
+            ech.write_inventory()
+        elif user_selection == '2':
+            bil = From_File_Golden_Eagle.GoldenEagleFromFile('BIL')
+            bil.write_inventory()
+        elif user_selection == '3':
+            ech = From_File_Golden_Eagle.GoldenEagleFromFile('ECH')
+            bil = From_File_Golden_Eagle.GoldenEagleFromFile('BIL')
+            ech.write_inventory()
+            bil.write_inventory()
+        elif user_selection == 'back':
             self.golden_eagle_menu()
-        self.golden_eagle_menu()
+        elif user_selection == 'exit':
+            sys.exit()
+        else:
+            print('That is not a valid selection please choose from the available options')
+            self.golden_eagle_from_file_menu()
+        self.golden_eagle_from_file_menu()
 
     def cpd_xml_response(self):
         self.cls()
         print('CPD XML Response Menu \n ------------ \n[1] Kohler \n[2] Tecumseh \n[3] Hydro Gear \n[4] Case '
-              '\n[5] AYP [6]All \n[back] Back to CPD Menu \n[exit] Exit Program\n')
+              '\n[5] AYP [6]All \n[back] Back to CPD Menu \n[exit] Exit Program')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             koh = XML_CPD.CPD('KOH')

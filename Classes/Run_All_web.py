@@ -21,26 +21,23 @@ class RunAll:
         arn.save_to_filepath = self.results_filepath
         aip = Distributor_AIP.AIP('AIP')
         aip.save_to_filepath = self.results_filepath
-        th1 = threading.Thread(target=self.golden_eagle)
+        # th1 = threading.Thread(target=self.golden_eagle)
         th2 = threading.Thread(target=kaw.write_inventory)
         th3 = threading.Thread(target=aip.write_inventory)
         th4 = threading.Thread(target=arn.write_inventory)
-
-        th1.start()
+        # th1.start()
         th2.start()
         th3.start()
         th4.start()
-
-
         input('Press Enter To Finish')
-
-    def golden_eagle(self):
-        bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
-        bil.save_to_filepath = self.results_filepath
-        bil.write_inventory()
-        ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
-        ech.save_to_filepath = self.results_filepath
-        ech.write_inventory()
+    #
+    # def golden_eagle(self):
+    #     bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
+    #     bil.save_to_filepath = self.results_filepath
+    #     bil.write_inventory()
+    #     ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
+    #     ech.save_to_filepath = self.results_filepath
+    #     ech.write_inventory()
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')

@@ -2,6 +2,7 @@ from Classes import From_File_OscarWilson
 from Classes import From_File_Stens
 from Classes import XML_CPD
 from Classes import Ideal_Scrape
+from Classes import From_File_Golden_Eagle
 import time
 import os
 
@@ -11,6 +12,20 @@ class RunAll:
     def run(self):
         self.cls()
         results_filepath = r'T:/ebay/All/inventory/All_new_' + time.strftime('%m%d%Y' + '_' + '%I%M') + 'self.csv'
+        try:
+            bil = From_File_Golden_Eagle.GoldenEagleFromFile("BIL")
+            bil.write_to_filepath = results_filepath
+            bil.write_inventory()
+            bil_success = 'BIL Update Successful'
+        except:
+            bil_success = 'Error Updating BIL'
+        try:
+            ech = From_File_Golden_Eagle.GoldenEagleFromFile("ECH")
+            ech.write_to_filepath = results_filepath
+            ech.write_inventory()
+            ech_success = 'ECH Update Successful'
+        except:
+            ech_success = 'Error Updating ECH'
         try:
             mtd = From_File_OscarWilson.UpdateInventory('MTD')
             mtd.save_to_filepath = results_filepath
@@ -66,7 +81,7 @@ class RunAll:
             ayp.write_inventory()
             ayp_success = 'AYP Update Successful'
         except:
-            ayp_success = 'Error Updating Kohler'
+            ayp_success = 'Error Updating AYP'
         try:
             ideal = Ideal_Scrape.DatabaseConnection()
             ideal.save_to_filepath = results_filepath
@@ -76,7 +91,7 @@ class RunAll:
             ideal_success = 'Error Updating Self'
         print(ideal_success)
         print_list = [mtd_success, mar_success,ste_success, ic_success, hyd_success, tec_success, koh_success,
-                      ayp_success, ideal_success]
+                      ech_success, bil_success, ayp_success, ideal_success]
         for item in print_list:
             print(item)
         input('Press Enter To Finish')
