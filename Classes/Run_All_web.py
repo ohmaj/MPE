@@ -29,7 +29,6 @@ class RunAll:
         th2.start()
         th3.start()
         th4.start()
-        input('Press Enter To Finish')
     #
     # def golden_eagle(self):
     #     bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')

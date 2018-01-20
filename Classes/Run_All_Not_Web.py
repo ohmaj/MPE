@@ -94,7 +94,6 @@ class RunAll:
                       ech_success, bil_success, ayp_success, ideal_success]
         for item in print_list:
             print(item)
-        input('Press Enter To Finish')
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
