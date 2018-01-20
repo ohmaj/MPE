@@ -11,8 +11,8 @@ class PartsTreeScraper:
     def __init__(self, mfr_code, mfr_name):
         self.mfr_code = mfr_code
         self.mfr_name = mfr_name
-        self.product_ids_filepath = r'T:/ebay/' + mfr_code + '/Data/New_Listings/ProductIds.csv'
-        self.results_filepath = r'T:/ebay/' + mfr_code + '/Data/New_Listings/Parts_Tree' + \
+        self.product_ids_filepath = r'T:/ebay/' + mfr_code + '/Data/2018/ProductIds.csv'
+        self.results_filepath = r'T:/ebay/' + mfr_code + '/Data/2018/Parts_Tree' + \
                                 time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
 
     def write_scrape(self):
@@ -20,8 +20,8 @@ class PartsTreeScraper:
         scraped_dataset = list(self.run_scrape(data_set))
         self.write_list_to_file(scraped_dataset)
 
-    def get_scrape_single(self, product_id, product_mfr_name):
-        url = self.construct_url(product_mfr_name, product_id)
+    def get_scrape_single(self, product_id):
+        url = self.construct_url(product_id.strip('[]').replace(' ', '-'))
         parts_tree_scrape = self.scrape_part(url)
         return parts_tree_scrape
 
@@ -41,7 +41,7 @@ class PartsTreeScraper:
         total = len(list(data_set))
         for part in data_set:
             # construct url
-            url = self.construct_url(part['MFR'], ((part['Product ID']).strip('[]').replace(' ', '-')))
+            url = self.construct_url((part['Product ID']).strip('[]').replace(' ', '-'))
             # scrape url
             parts_tree_part = self.scrape_part(url)
             self.cls()
@@ -52,8 +52,8 @@ class PartsTreeScraper:
             parts_tree_part.item_id = part['Item ID']
             yield parts_tree_part
 
-    def construct_url(self, mfr, part_id):
-        return 'http://www.partstree.com/parts/' + mfr + '/parts/' + part_id.lower() + '/'
+    def construct_url(self, part_id):
+        return 'http://www.partstree.com/parts/' + self.mfr_name + '/parts/' + part_id.lower() + '/'
 
     def scrape_part(self, url):
         page = requests.get(url)
@@ -68,11 +68,11 @@ class PartsTreeScraper:
             parts_tree_part.part_description = tree.xpath('/html/body/div[2]/div[2]/div[5]/div/div[2]/p[3]/text()')[0]
         except:
             pass
-        # try:
-        compatable_machines = tree.xpath('/html/body/div[2]/div[2]/div[6]/ul/li/a/text()')
-        parts_tree_part.compatable_machines = '<br>'.join(compatable_machines)
-        # except:
-        #     pass
+        try:
+            compatable_machines = tree.xpath('/html/body/div[2]/div[2]/div[6]/ul/li/a/text()')
+            parts_tree_part.compatable_machines = '<br>'.join(compatable_machines)
+        except:
+            pass
         try:
             parts_tree_part.part_thumbnail_src = \
                 tree.xpath('/html/body/div[2]/div[2]/div[4]/div[2]/div[1]/a/img/@src')[0]
@@ -88,3 +88,7 @@ class PartsTreeScraper:
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
+
+
+pt = PartsTreeScraper('KOH', 'kohler-engines')
+pt.write_scrape()

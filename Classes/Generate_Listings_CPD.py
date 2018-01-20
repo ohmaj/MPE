@@ -31,7 +31,7 @@ class Ebay:
         count = 1
         total = len(products)
         for product in products:
-            parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'], self.mfr_name)
+            parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'])
             product['Picture'] = parts_tree_part.part_thumbnail_src
             product['Where Used'] = parts_tree_part.compatable_machines
             self.cls()
@@ -67,3 +67,7 @@ class Ebay:
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
+
+
+generate = Ebay()
+generate.write_listing()
