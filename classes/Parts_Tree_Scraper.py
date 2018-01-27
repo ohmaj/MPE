@@ -1,6 +1,6 @@
 from lxml import html
 import requests
-from Models import Parts_Tree_Model
+from models import Parts_Tree_Model
 import csv
 import time
 import os

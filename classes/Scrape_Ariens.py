@@ -1,17 +1,18 @@
-from Classes import Distributor
+from classes import ABC_Distributor_Scrape
 from lxml import html
 import re
 from selenium.webdriver.support.ui import Select
 
 
-class Ariens(Distributor.ScrapeDistributor):
+class Ariens(ABC_Distributor_Scrape.DistributorScrape):
 
     def __init__(self, manufacturer):
         super(Ariens, self).__init__(manufacturer)
         self.manufacturer = manufacturer
         self.login_url = r'http://connect.ariens.com/cgibin/pnrg0099d'
 
-    def login(self, browser):
+    def login(self):
+        browser = self.browser
         username = self.username
         password = self.password
         loginUrl = self.login_url

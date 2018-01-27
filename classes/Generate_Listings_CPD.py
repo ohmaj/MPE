@@ -1,5 +1,5 @@
-from Models import Listing_Model
-from Classes import Parts_Tree_Scraper
+from models import Listing_Model
+from classes import Parts_Tree_Scraper
 import csv
 import time
 import os
@@ -17,6 +17,8 @@ class Ebay:
     def write_listing(self):
         products = list(self.get_new_products())
         products = list(self.set_partstree_info(products))
+        products_s = list(self.set_partstree_info(products))
+        products = products + products_s
         self.write_to_file(products)
 
     def get_new_products(self):
@@ -38,6 +40,21 @@ class Ebay:
             print('Getting Parts Tree Info: ' + str(int((count / total) * 100)) + '%')
             count += 1
             yield (product)
+        print('testing')
+
+    def set_partstree_info_s(self, products):
+        parts_tree_scraper = Parts_Tree_Scraper.PartsTreeScraper(self.mfr_code, self.mfr_name)
+        count = 1
+        total = len(products)
+        for product in products:
+            parts_tree_part = parts_tree_scraper.get_scrape_single(product['Product ID'] + '-s')
+            product['Picture'] = parts_tree_part.part_thumbnail_src
+            product['Where Used'] = parts_tree_part.compatable_machines
+            self.cls()
+            print('Getting Parts Tree Info: ' + str(int((count / total) * 100)) + '%')
+            count += 1
+            yield (product)
+        print('testing')
 
     def write_to_file(self, products):
         print('Writing File....')

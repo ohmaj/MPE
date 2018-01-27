@@ -1,11 +1,11 @@
-from Classes import Distributor_Kawasaki
-from Classes import Distributor_Golden_Eagle
-from Classes import Distributor_Ariens
-from Classes import Distributor_AIP
-from Classes import From_File_OscarWilson
-from Classes import From_File_Stens
-from Classes import XML_CPD
-from Classes import Ideal_Scrape
+from classes import Scrape_Kawasaki
+from classes import Scrape_Golden_Eagle
+from classes import Scrape_Ariens
+from classes import Scrape_AIP
+from classes import From_File_OscarWilson
+from classes import From_File_Stens
+from classes import XML_CPD
+from classes import Ideal_Scrape
 import time
 import os
 import threading
@@ -15,11 +15,11 @@ class RunAll:
 
     def run(self):
         self.cls()
-        kaw = Distributor_Kawasaki.Kawasaki('KAW')
+        kaw = Scrape_Kawasaki.Kawasaki('KAW')
         kaw.save_to_filepath = self.results_filepath
-        arn = Distributor_Ariens.Ariens('ARN')
+        arn = Scrape_Ariens.Ariens('ARN')
         arn.save_to_filepath = self.results_filepath
-        aip = Distributor_AIP.AIP('AIP')
+        aip = Scrape_AIP.AIP('AIP')
         aip.save_to_filepath = self.results_filepath
         # th1 = threading.Thread(target=self.golden_eagle)
         th2 = threading.Thread(target=kaw.write_inventory)

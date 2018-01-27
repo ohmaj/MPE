@@ -1,16 +1,17 @@
 from lxml import html
-from Classes import Distributor
+from classes import ABC_Distributor_Scrape
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-class AIP(Distributor.ScrapeDistributor):
+class AIP(ABC_Distributor_Scrape.DistributorScrape):
 
     def __init__(self, manufacturer):
         super(AIP, self).__init__(manufacturer)
 
-    def login(self, browser):
+    def login(self):
+        browser = self.browser
         login_url = r'https://' + self.username + ':' + self.password + '@www.aiproducts.com/dealer/customer.htm'
         browser.get(login_url)
         frame_x_path = '/html/frameset/frameset/frame[1]'

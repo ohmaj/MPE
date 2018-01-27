@@ -1,5 +1,5 @@
-from Models import Listing_Model
-from Classes import Parts_Tree_Scraper
+from models import Listing_Model
+from classes import Parts_Tree_Scraper
 import csv
 import time
 import os

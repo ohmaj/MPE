@@ -1,13 +1,13 @@
-from Classes import Distributor_Golden_Eagle
-from Classes import Distributor_Kawasaki
-from Classes import Distributor_Ariens
-from Classes import Distributor_AIP
-from Classes import XML_CPD
-from Classes import From_File_OscarWilson
-from Classes import Run_All_web
-from Classes import Run_All_Not_Web
-from Classes import Ideal_Scrape
-from Classes import From_File_Golden_Eagle
+from classes import Scrape_Golden_Eagle
+from classes import Scrape_Kawasaki
+from classes import Scrape_Ariens
+from classes import Scrape_AIP
+from classes import XML_CPD
+from classes import From_File_OscarWilson
+from classes import Run_All_web
+from classes import Run_All_Not_Web
+from classes import Ideal_Scrape
+from classes import From_File_Golden_Eagle
 import sys
 import os
 
@@ -32,7 +32,7 @@ class UserInterface:
         elif user_selection == '6':
             self.ow_menu()
         elif user_selection == '7':
-            ideal = Ideal_Scrape.DatabaseConnection()
+            ideal = Ideal_Scrape.Database()
             ideal.write_inventory()
         elif user_selection == '8':
             self.run_all()
@@ -73,7 +73,7 @@ class UserInterface:
               '\n[back] Back to Main Menu \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
-            aip = Distributor_AIP.AIP('AIP')
+            aip = Scrape_AIP.AIP('AIP')
             aip.write_inventory()
         elif user_selection == 'back':
             self.main_menu()
@@ -134,7 +134,7 @@ class UserInterface:
               '[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
-            kaw = Distributor_Kawasaki.Kawasaki('KAW')
+            kaw = Scrape_Kawasaki.Kawasaki('KAW')
             kaw.write_inventory()
         elif user_selection == 'back':
             self.main_menu()
@@ -151,7 +151,7 @@ class UserInterface:
         print('Ariens Menu \n ------------ \n[1] Scrape Ariens \n[back] Back to Main Menu \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
-            ariens = Distributor_Ariens.Ariens('ARN')
+            ariens = Scrape_Ariens.Ariens('ARN')
             ariens.write_inventory()
         elif user_selection == 'back':
             self.main_menu()
@@ -187,14 +187,14 @@ class UserInterface:
               '\n[back] Back to Previous Menu \n[exit] Exit Program')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
-            ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
+            ech = Scrape_Golden_Eagle.Golden_Eagle('ECH')
             ech.write_inventory()
         elif user_selection == '2':
-            bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
+            bil = Scrape_Golden_Eagle.Golden_Eagle('BIL')
             bil.write_inventory()
         elif user_selection == '3':
-            ech = Distributor_Golden_Eagle.Golden_Eagle('ECH')
-            bil = Distributor_Golden_Eagle.Golden_Eagle('BIL')
+            ech = Scrape_Golden_Eagle.Golden_Eagle('ECH')
+            bil = Scrape_Golden_Eagle.Golden_Eagle('BIL')
             ech.write_inventory()
             bil.write_inventory()
         elif user_selection == 'back':

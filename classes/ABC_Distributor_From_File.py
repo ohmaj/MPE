@@ -1,8 +1,8 @@
 from abc import abstractmethod
-from Classes import Distrib_New
+from classes import ABC_Distributor
 
 
-class ABCDistributorFromFile(Distrib_New.Distributor):
+class ABCDistributorFromFile(ABC_Distributor.Distributor):
 
     def __init__(self, mfr):
         super().__init__(mfr)

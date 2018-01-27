@@ -1,30 +1,30 @@
-from Classes import Distributor
+from classes import ABC_Distributor_Scrape
 from lxml import html
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-class Golden_Eagle(Distributor.ScrapeDistributor):
+class Golden_Eagle(ABC_Distributor_Scrape.DistributorScrape):
 
     def __init__(self, manufacturer):
-        super(Golden_Eagle, self).__init__(manufacturer)
+        super().__init__(manufacturer)
         self.login_url = r'http://netstore.goldeneagledist.com/netstore/StartServlet'
         self.product_search_url = r'http://netstore.goldeneagledist.com/netstore/ItemDetailServlet?KEY_ITEM='
 
-    def login(self, browser):
+    def login(self):
         # logon_dict = User_Info.Credentials('Golden_Eagle')
         username_name = 'User'
         password_name = 'Password'
         login_button_name = 'ACTION_SIGNON'
         login_button_xpath = '//*[@id="layout-middle"]/div/div[1]/div[1]/ul/li[1]/a'
-        browser.get(self.login_url)
-        myElem = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.XPATH, login_button_xpath)))
-        browser.find_element_by_xpath(login_button_xpath).click()
-        browser.find_element_by_name(username_name).clear()
-        browser.find_element_by_name(username_name).send_keys(self.username)
-        browser.find_element_by_name(password_name).send_keys(self.password)
-        browser.find_element_by_name(login_button_name).click()
+        self.browser.get(self.login_url)
+        myElem = WebDriverWait(self.browser, 1).until(EC.presence_of_element_located((By.XPATH, login_button_xpath)))
+        self.browser.find_element_by_xpath(login_button_xpath).click()
+        self.browser.find_element_by_name(username_name).clear()
+        self.browser.find_element_by_name(username_name).send_keys(self.username)
+        self.browser.find_element_by_name(password_name).send_keys(self.password)
+        self.browser.find_element_by_name(login_button_name).click()
 
     def load_product(self, product_id, browser):
         if browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[1]/ul/li[1]/a/text()') == 'Sign on':

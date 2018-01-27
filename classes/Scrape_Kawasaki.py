@@ -1,8 +1,8 @@
-from Classes import Distributor
+from classes import ABC_Distributor_Scrape
 from lxml import html
 
 
-class Kawasaki(Distributor.ScrapeDistributor):
+class Kawasaki(ABC_Distributor_Scrape.DistributorScrape):
 
     def __init__(self, manufacturer):
         super(Kawasaki, self).__init__(manufacturer)
@@ -26,3 +26,6 @@ class Kawasaki(Distributor.ScrapeDistributor):
         # item['Cost'] = cost[0].strip('$ ')
         item['Quantity'] = availability
         return item
+
+    def login(self):
+        pass

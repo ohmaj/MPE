@@ -1,8 +1,8 @@
-from Classes import From_File_OscarWilson
-from Classes import From_File_Stens
-from Classes import XML_CPD
-from Classes import Ideal_Scrape
-from Classes import From_File_Golden_Eagle
+from classes import From_File_OscarWilson
+from classes import From_File_Stens
+from classes import XML_CPD
+from classes import Ideal_Scrape
+from classes import From_File_Golden_Eagle
 import time
 import os
 
@@ -83,7 +83,7 @@ class RunAll:
         except:
             ayp_success = 'Error Updating AYP'
         try:
-            ideal = Ideal_Scrape.DatabaseConnection()
+            ideal = Ideal_Scrape.Database()
             ideal.save_to_filepath = results_filepath
             ideal.write_inventory()
             ideal_success = 'Self Update Successful'
