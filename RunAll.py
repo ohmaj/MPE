@@ -1,5 +1,5 @@
-from Classes import Run_All_web
-from Classes import Run_All_Not_Web
+from classes import Run_All_web
+from classes import Run_All_Not_Web
 
 
 def start():

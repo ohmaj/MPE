@@ -1,4 +1,4 @@
-from Classes import From_File_Stens
+from classes import From_File_Stens
 
 
 ste = From_File_Stens.Update_Inventory()
