@@ -33,7 +33,7 @@ class UserInterface:
             self.ow_menu()
         elif user_selection == '7':
             ideal = Ideal_Scrape.Database()
-            ideal.write_inventory()
+            ideal.write_inventory_changes()
         elif user_selection == '8':
             self.run_all()
         elif user_selection == 'exit':

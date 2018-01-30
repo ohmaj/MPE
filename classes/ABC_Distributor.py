@@ -55,6 +55,7 @@ class Distributor(ABC):
                 v['Quantity'] = inventory[k.strip('[]')]['Qty on Hand']
             except:
                 v['Quantity'] = 'Error'
+                v['Error'] = 'could not reconcile'
         return products
 
     def get_product_dictionary(self):

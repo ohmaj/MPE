@@ -26,6 +26,18 @@ class Database(ABC_Distributor.Distributor):
             product_ids_dict[product['SKU']] = product
         return product_ids_dict
 
+    def get_product_changes_dictionary(self):
+        product_ids_dict = {}
+        with open(r'T:/ebay/All/inventory/self_ProductIds.csv', encoding="utf8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                del row['Title']
+                row['Fulfillment Source'] = 'self'
+                row['Action'] = 'Reconcileto'
+                row['Error'] = ''
+                product_ids_dict[row['SKU']] = row
+        return product_ids_dict
+
     def get_product_ids_dataset(self):
         for mfr_ids_filepath in self.product_ids_filepath:
             with open(mfr_ids_filepath, encoding="utf8") as f:
@@ -60,3 +72,15 @@ class Database(ABC_Distributor.Distributor):
             except:
                 v['Quantity'] = 0
         return products
+
+    def write_inventory_changes(self):
+        products = self.get_product_dictionary()
+        inventory = self.get_inventory()
+        products_archived = self.get_product_changes_dictionary()
+        inventory_changes = self.get_inventory_changes(products, inventory)
+        if len(inventory_changes.items()) > 0:
+            sanitized_inventory_changes = self.sanitize_inventory(inventory_changes)
+            self.write_dict_to_csv(sanitized_inventory_changes)
+            sanitized_inventory = self.sanitize_inventory(inventory)
+            self.write_to_filepath = r'T:/ebay/All/inventory/self_ProductIds.csv'
+            self.write_dict_to_new_csv(sanitized_inventory)
