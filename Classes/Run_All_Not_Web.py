@@ -83,6 +83,20 @@ class RunAll:
         except:
             ayp_success = 'Error Updating AYP'
         try:
+            mart = XML_CPD.CPD('MART')
+            mart.save_to_filepath = results_filepath
+            mart.write_inventory()
+            mart_success = 'AYP Update Successful'
+        except:
+            mart_success = 'Error Updating AYP'
+        try:
+            ngk = XML_CPD.CPD('NGK')
+            ngk.save_to_filepath = results_filepath
+            ngk.write_inventory()
+            ngk_success = 'AYP Update Successful'
+        except:
+            ngk_success = 'Error Updating AYP'
+        try:
             ideal = Ideal_Scrape.DatabaseConnection()
             ideal.save_to_filepath = results_filepath
             ideal.write_inventory()
@@ -91,7 +105,7 @@ class RunAll:
             ideal_success = 'Error Updating Self'
         print(ideal_success)
         print_list = [mtd_success, mar_success,ste_success, ic_success, hyd_success, tec_success, koh_success,
-                      ech_success, bil_success, ayp_success, ideal_success]
+                      ech_success, bil_success, ayp_success, mart_success,ngk_success, ideal_success]
         for item in print_list:
             print(item)
 

@@ -5,7 +5,7 @@ import time
 class UpdateInventory:
     def __init__(self, mfr):
         self.mfr = mfr
-        self.ow_dump_file_path = r'T:/ebay/Oscar_Wilson/McHenryDumpFile.csv'
+        self.ow_dump_file_path = r'T:/ebay/Oscar_Wilson/McHenry.csv'
         self.currently_running_file_path = 'T:/ebay/'+mfr+'/inventory/ProductIds.csv'
         self.save_to_filepath = 'T:/ebay/' + mfr + '/inventory/' + mfr + '_Updated_Inventory.' \
                                 + time.strftime("%m%d%Y" + '.' + "%I%M") + '.csv'
@@ -24,23 +24,29 @@ class UpdateInventory:
 
     def read_from_ow(self):
         ow_dict = {}
+        csv.register_dialect('piper', delimiter='|', quoting=csv.QUOTE_NONE)
         with open(self.ow_dump_file_path) as f:
-            ow_products = [{
-                'OW Vendor Code': row[0],
-                'Manufacturer Item No': row[1],
-                'OW Item Number': row[2],
-                'TEMPSKU': '['+row[0]+']['+row[1]+']',
-                'Description': row[3],
-                'Cost': row[4],
-                'MSRP': row[5],
-                'Qty Available': row[6],
-                'Sub To Manufacturer Item number': row[7],
-                'Sub To Vendor Code': row[8],
-                'Status': row[9],
-                'Manufacturer Code': row[10],
-                'Manufacturer': row[11],
-                'OW Sub Number': row[12],
-            } for row in csv.reader(f)]
+            ow_products = []
+            for row in csv.reader(f, dialect='piper'):
+                try:
+                    product_dict = {
+                        'OW Vendor Code': row[0],
+                        'Manufacturer Item No': row[1],
+                        'OW Item Number': row[2],
+                        'TEMPSKU': '['+row[0]+']['+row[1]+']',
+                        'Description': row[3],
+                        'Cost': row[4],
+                        'MSRP': row[5],
+                        'Qty Available': row[6],
+                        'Sub To Manufacturer Item number': row[7],
+                        'Sub To Vendor Code': row[8],
+                        'Status': row[9],
+                        'Manufacturer Code': row[10],
+                        'Manufacturer': row[11],
+                        'OW Sub Number': row[12]}
+                    ow_products.append(product_dict)
+                except:
+                    pass
             for item in list(ow_products):
                 ow_dict[item['TEMPSKU']] = item
             return ow_dict

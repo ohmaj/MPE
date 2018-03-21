@@ -10,6 +10,7 @@ from Classes import Ideal_Scrape
 from Classes import From_File_Golden_Eagle
 import sys
 import os
+import time
 
 
 class UserInterface:
@@ -64,7 +65,7 @@ class UserInterface:
             sys.exit()
         else:
             print('That is not a valid selection please choose from the available options')
-            self.cpd_menu()
+            self.run_all()
         self.run_all()
 
     def aip_menu(self):
@@ -220,6 +221,10 @@ class UserInterface:
         elif user_selection == '3':
             ech = From_File_Golden_Eagle.GoldenEagleFromFile('ECH')
             bil = From_File_Golden_Eagle.GoldenEagleFromFile('BIL')
+            ech.write_to_filepath = 'T:/ebay/Golden Eagle/inventory/GoldenEagle_Scrape' +\
+                                    time.strftime("%m%d" + '.' + "%I%M") + '.csv'
+            bil.write_to_filepath = 'T:/ebay/Golden Eagle/inventory/GoldenEagle_Scrape' +\
+                                    time.strftime("%m%d" + '.' + "%I%M") + '.csv'
             ech.write_inventory()
             bil.write_inventory()
         elif user_selection == 'back':
@@ -234,7 +239,7 @@ class UserInterface:
     def cpd_xml_response(self):
         self.cls()
         print('CPD XML Response Menu \n ------------ \n[1] Kohler \n[2] Tecumseh \n[3] Hydro Gear \n[4] Case '
-              '\n[5] AYP [6]All \n[back] Back to CPD Menu \n[exit] Exit Program')
+              '\n[5] AYP [6] NGK \n[7] All \n[back] Back to CPD Menu \n[exit] Exit Program')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             koh = XML_CPD.CPD('KOH')
@@ -252,6 +257,9 @@ class UserInterface:
             ayp = XML_CPD.CPD('AYP')
             ayp.get_xml_response()
         elif user_selection == '6':
+            ngk = XML_CPD.CPD('NGK')
+            ngk.get_xml_response()
+        elif user_selection == '7':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.get_xml_response()
@@ -277,6 +285,11 @@ class UserInterface:
                 ayp.get_xml_response()
             except:
                 pass
+            try:
+                ngk = XML_CPD.CPD('NGK')
+                ngk.get_xml_response()
+            except:
+                pass
         elif user_selection == 'back':
             self.cpd_menu()
         elif user_selection == 'exit':
@@ -289,7 +302,7 @@ class UserInterface:
     def cpd_xml_menu(self):
         self.cls()
         print('CPD XML Quantity Menu \n ------------ \n[1] Kohler \n[2] Tecumseh \n[3] Hydro Gear \n[4] Case \n[5] AYP '
-              '\n[6] Martin Wheels \n[7] All \n[back] Back to CPD Menu \n[exit] Exit Program\n')
+              '\n[6] Martin Wheels \n[7] NGK \n[8] All \n[back] Back to CPD Menu \n[exit] Exit Program\n')
         user_selection = input('What would you like to do?: ')
         if user_selection == '1':
             koh = XML_CPD.CPD('KOH')
@@ -310,6 +323,9 @@ class UserInterface:
             mart = XML_CPD.CPD('MART')
             mart.write_inventory()
         elif user_selection == '7':
+            ngk = XML_CPD.CPD('NGK')
+            ngk.write_inventory()
+        elif user_selection == '8':
             try:
                 koh = XML_CPD.CPD('KOH')
                 koh.write_inventory()
@@ -340,6 +356,11 @@ class UserInterface:
                 mart.write_inventory()
             except:
                 pass
+            try:
+                ngk = XML_CPD.CPD('NGK')
+                ngk.write_inventory()
+            except:
+                pass
         elif user_selection == 'back':
             self.main_menu()
         elif user_selection == 'exit':
@@ -349,7 +370,8 @@ class UserInterface:
             self.cpd_xml_menu()
         self.cpd_xml_menu()
 
-    def cls(self):
+    @staticmethod
+    def cls():
         os.system('cls' if os.name == 'nt' else 'clear')
 
 

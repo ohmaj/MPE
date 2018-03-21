@@ -14,7 +14,17 @@ class DatabaseConnection:
                                       r'T:/ebay/MTD/inventory/ProductIds.csv', r'T:/ebay/AIP/inventory/ProductIds.csv',
                                       r'T:/ebay/STE/inventory/ProductIds.csv', r'T:/ebay/MART/inventory/ProductIds.csv',
                                       r'T:/ebay/AYP/inventory/ProductIds.csv', r'T:/ebay/FEL/inventory/ProductIds.csv',
-                                      r'T:/ebay/MAR/inventory/ProductIds.csv']
+                                      r'T:/ebay/MAR/inventory/ProductIds.csv', r'T:/ebay/OPT/inventory/ProductIds.csv',
+                                      r'T:/ebay/BRS/inventory/ProductIds.csv', r'T:/ebay/ECCO/inventory/ProductIds.csv',
+                                      r'T:/ebay/MAG/inventory/ProductIds.csv', r'T:/ebay/MEY/inventory/ProductIds.csv',
+                                      r'T:/ebay/WAI/inventory/ProductIds.csv', r'T:/ebay/EDG/inventory/ProductIds.csv',
+                                      r'T:/ebay/CHA/inventory/ProductIds.csv', r'T:/ebay/CHAP/inventory/ProductIds.csv',
+                                      r'T:/ebay/BROW/inventory/ProductIds.csv', r'T:/ebay/EM/inventory/ProductIds.csv',
+                                      r'T:/ebay/ALGR/inventory/ProductIds.csv', r'T:/ebay/MEY/inventory/ProductIds.csv',
+                                      r'T:/ebay/NGK/inventory/ProductIds.csv', r'T:/ebay/SEAF/inventory/ProductIds.csv',
+                                      r'T:/ebay/JUNG/inventory/ProductIds.csv', r'T:/ebay/KAR/inventory/ProductIds.csv',
+                                      r'T:/ebay/LW/inventory/ProductIds.csv', r'T:/ebay/OEP/inventory/ProductIds.csv',
+                                      r'T:/ebay/ORG/inventory/ProductIds.csv', r'T:/ebay/ROB/inventory/ProductIds.csv']
         self.save_to_filepath = r'T:/ebay/All/inventory/' + 'Self_Scrape' + time.strftime("%m%d%Y" + '.' + "%I%M") \
                                 + '.csv'
 

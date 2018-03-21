@@ -3,6 +3,7 @@ import time
 import csv
 import os
 import selenium.webdriver as webdriver
+from random import randint
 
 
 class ScrapeDistributor(object):
@@ -21,6 +22,28 @@ class ScrapeDistributor(object):
         self.login(self.browser)
         # get data set
         products = list(self.get_product_list())
+        # iterate through data set
+        updated_products = list(self.get_distributor_inventory(products))
+        self.write_dict_to_csv(updated_products)
+        try:
+            self.browser.quit()
+        except:
+            pass
+
+    def write_inventory_threaded(self, number_batches, number_batch):
+        self.set_credentials()
+        self.login(self.browser)
+        # get data set
+        products = list(self.get_product_list())
+        total = len(products)
+        number_batches = number_batches
+        number_batch = number_batch
+        size_batch = total/number_batches
+        start_index = (total/number_batches)*number_batch
+        end_index = start_index+size_batch-1
+        if end_index > total-1:
+            end_index = total-1
+        products = products[int(start_index):int(end_index)]
         # iterate through data set
         updated_products = list(self.get_distributor_inventory(products))
         self.write_dict_to_csv(updated_products)
@@ -68,8 +91,9 @@ class ScrapeDistributor(object):
     def get_distributor_inventory(self, products):
         count = 1
         total = len(products)
+        random_int = randint(0, 9)*(randint(0, 9)+50)
         for item in products:
-            if count % 600 == 0:
+            if count % 500 + random_int == 0:
                 self.browser.quit()
                 self.browser = webdriver.Firefox()
                 self.login(self.browser)
@@ -102,7 +126,8 @@ class ScrapeDistributor(object):
     def load_product(self, product_id, browser):
         pass
 
-    def scrape_page(self, browser):
+    @staticmethod
+    def scrape_page(browser):
         return browser.page_source
 
     def parse_scrape(self, item, scrape):
@@ -133,5 +158,14 @@ class ScrapeDistributor(object):
             dict_writer.writeheader()
             dict_writer.writerows(ordered_dicts)
 
-    def cls(self):
+    def write_generic_dict_to_csv(self, updated_products):
+        print('Writing File....')
+        keys = updated_products[0].keys()
+        with open(self.save_to_filepath, 'a', newline='', encoding='utf-8') as csv_file:
+            dict_writer = csv.DictWriter(csv_file, keys)
+            dict_writer.writeheader()
+            dict_writer.writerows(updated_products)
+
+    @staticmethod
+    def cls():
         os.system('cls' if os.name == 'nt' else 'clear')
